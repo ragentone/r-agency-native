@@ -24,6 +24,7 @@ import type {
   IUserMetaData,
 } from '../types';
 import { AuthContext, type IAuthContext } from './auth.context';
+import { AuthDeleteUserDialog } from './AuthDeleteUserDialog';
 import { AuthLogoutConfirmDialog } from './AuthLogoutConfirmDialog';
 import { AuthLogoutOverlay } from './AuthLogoutOverlay';
 
@@ -281,6 +282,7 @@ const AuthProvider = ({ children }: IProps) => {
         }}
         onAbort={() => setLogoutConfirm(false)}
       />
+      <AuthDeleteUserDialog />
     </AuthContext.Provider>
   );
 };

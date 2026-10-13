@@ -1,0 +1,147 @@
+{
+  "title": "My Account",
+  "subtitle": "Manage your personal details, account preferences and privacy.",
+  "logout": {
+    "trigger": "Log Out"
+  },
+  "delete": {
+    "title": "Delete Account",
+    "description": "Permanently delete your account, personal profile, settings, and all associated data. Once your account is deleted, all your information and activity will be permanently removed and cannot be recovered. This action is irreversible and cannot be undone.",
+    "confirm": "I understand the consequences"
+  },
+  "tabs": {
+    "profile": "Profile & Info",
+    "profileDesc": "Personal information and basic data",
+    "privacy": "Privacy & Visibility",
+    "privacyDesc": "Visibility in the network and profile privacy",
+    "password": "Change Password",
+    "passwordDesc": "Set current password and new login password",
+    "info": "Account Details",
+    "delete": "Delete Account",
+    "deleteDesc": "Permanently delete account and all associated data",
+    "identifiers": "Identifiers",
+    "identifiersDesc": "User ID and device ID, e.g. for support"
+  },
+  "actions": {
+    "reload": "Reload",
+    "logout": "Log out",
+    "loggingOut": "Logging out...",
+    "retry": "Try again",
+    "scrollTop": "Back to top",
+    "back": "Back"
+  },
+  "card": {
+    "userType": "Account Type",
+    "status": "Status",
+    "active": "Active",
+    "lastLogin": "Last Login",
+    "never": "Never",
+    "email": "Email Address",
+    "alias": "Username",
+    "role": "Role",
+    "superUser": "Superuser",
+    "age": "Age",
+    "yearsOld": "{{count}} years",
+    "years": "years",
+    "standard": "Standard",
+    "yes": "Yes",
+    "no": "No",
+    "viewProfile": "View profile",
+    "location": "Location"
+  },
+  "avatar": {
+    "change": "Change avatar",
+    "cropTitle": "Adjust avatar",
+    "cropDescription": "Adjust your profile picture before uploading.",
+    "applyAndUpload": "Crop & Upload",
+    "uploadError": "Failed to upload avatar"
+  },
+  "form": {
+    "title": "Personal Information",
+    "description": "About me / Bio",
+    "alias": "Username / Alias",
+    "aliasPlaceholder": "Your username",
+    "email": "Email Address",
+    "firstname": "First Name",
+    "firstnamePlaceholder": "John",
+    "lastname": "Last Name",
+    "lastnamePlaceholder": "Doe",
+    "gender": "Gender",
+    "genderPlaceholder": "Select gender",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderUnknown": "Prefer not to say / Other",
+    "birthday": "Birthday",
+    "birthdayPlaceholder": "YYYY-MM-DD",
+    "descriptionPlaceholder": "Tell something about yourself...",
+    "privacyTitle": "Privacy & Settings",
+    "privacyDescription": "Configure how your information is shared and discovered.",
+    "public": "Public Profile",
+    "publicDesc": "Your profile is visible to other users.",
+    "searchable": "Searchable Profile",
+    "searchableDesc": "Other users can find your profile in search results.",
+    "showEmail": "Show Email Publicly",
+    "showEmailDesc": "Your email address will be displayed on your profile.",
+    "showFullName": "Show Full Name",
+    "showFullNameDesc": "Your full name will be shown instead of just your username.",
+    "submit": "Save Changes",
+    "submitting": "Saving..."
+  },
+  "messages": {
+    "loading": "Loading account details...",
+    "loggingOut": "Logging you out...",
+    "updateSuccess": "Account details saved successfully.",
+    "updateError": "Failed to update account. Please try again.",
+    "loadError": "Failed to load account details."
+  },
+  "validation": {
+    "aliasRequired": "Username is required",
+    "aliasMin": "Username must be at least {{min}} characters",
+    "aliasMax": "Username must be at most {{max}} characters",
+    "genderRequired": "Gender is required",
+    "descriptionMax": "“About me” must be at most {{max}} characters",
+    "aliasExists": "This username is already taken"
+  },
+  "settings": "Settings",
+  "teaser": {
+    "alt": "Header image",
+    "add": "Add header image",
+    "change": "Change header image",
+    "remove": "Remove header image",
+    "uploading": "Uploading header image …",
+    "cropTitle": "Adjust header image",
+    "cropDescription": "Choose the part of the image for your header.",
+    "applyAndUpload": "Crop & Upload",
+    "uploadError": "Couldn’t upload the header image.",
+    "removeTitle": "Remove header image?",
+    "removeDescription": "Your profile will show the empty background again.",
+    "removed": "Header image removed.",
+    "removeError": "Couldn’t remove the header image.",
+    "cancel": "Cancel"
+  },
+  "groups": {
+    "session": "Session",
+    "sessionDesc": "Signed in as @{{alias}}",
+    "danger": "Danger zone"
+  },
+  "ids": {
+    "userId": "User ID",
+    "deviceId": "Device ID",
+    "copy": "Copy",
+    "copyLabel": "Copy {{label}}",
+    "copied": "Copied",
+    "copyFailed": "Could not copy",
+    "unavailable": "Not available",
+    "hint": "The device ID only applies to this device or browser."
+  },
+  "native": {
+    "shareId": "Share",
+    "birthdayHint": "Format YYYY-MM-DD, e.g. 1990-05-21",
+    "birthdayInvalid": "Please enter a valid date in the format YYYY-MM-DD",
+    "descriptionFormatted": "Note: your description contains formatting from the web version. If you change it here, it will be saved as plain text.",
+    "avatarWeb": "You can currently change your avatar and banner in the web version.",
+    "deleteCountdown": "You can confirm in {{count}} s",
+    "deleteFailed": "Account could not be deleted. Please check your password.",
+    "characters": "{{count}} / {{max}} characters"
+  }
+}

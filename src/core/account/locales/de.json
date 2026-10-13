@@ -1,0 +1,147 @@
+{
+  "title": "Mein Konto",
+  "subtitle": "Verwalten Sie Ihre persönlichen Angaben, Kontoeinstellungen und Privatsphäre.",
+  "logout": {
+    "trigger": "Abmelden"
+  },
+  "delete": {
+    "title": "Konto löschen",
+    "description": "Löschen Sie Ihr Konto, Ihr persönliches Profil, Ihre Einstellungen und alle zugehörigen Daten unwiderruflich von der Plattform. Sobald Ihr Konto gelöscht ist, werden alle Ihre Informationen und Aktivitäten dauerhaft entfernt und können nicht wiederhergestellt werden. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "confirm": "Ich verstehe die Konsequenzen"
+  },
+  "tabs": {
+    "profile": "Profil & Daten",
+    "profileDesc": "Persönliche Informationen und Stammdaten",
+    "privacy": "Privatsphäre & Sichtbarkeit",
+    "privacyDesc": "Sichtbarkeit im Netzwerk und Profil-Datenschutz",
+    "password": "Passwort ändern",
+    "passwordDesc": "Aktuelles Passwort und neues Anmeldekennwort festlegen",
+    "info": "Konto-Details",
+    "delete": "Konto löschen",
+    "deleteDesc": "Konto und alle zugehörigen Daten unwiderruflich entfernen",
+    "identifiers": "Kennungen",
+    "identifiersDesc": "Nutzer-ID und Geräte-ID, z. B. für den Support"
+  },
+  "actions": {
+    "reload": "Neu laden",
+    "logout": "Abmelden",
+    "loggingOut": "Wird abgemeldet...",
+    "retry": "Erneut versuchen",
+    "scrollTop": "Nach oben",
+    "back": "Zurück"
+  },
+  "card": {
+    "userType": "Konto-Typ",
+    "status": "Status",
+    "active": "Aktiv",
+    "lastLogin": "Letzter Login",
+    "never": "Nie",
+    "email": "E-Mail-Adresse",
+    "alias": "Benutzername",
+    "role": "Rolle",
+    "superUser": "Superuser",
+    "age": "Alter",
+    "yearsOld": "{{count}} Jahre",
+    "years": "Jahre",
+    "standard": "Standard",
+    "yes": "Ja",
+    "no": "Nein",
+    "viewProfile": "Profil ansehen",
+    "location": "Standort"
+  },
+  "avatar": {
+    "change": "Avatar ändern",
+    "cropTitle": "Avatar anpassen",
+    "cropDescription": "Passe dein Profilbild vor dem Hochladen an.",
+    "applyAndUpload": "Zuschneiden & Hochladen",
+    "uploadError": "Fehler beim Hochladen des Avatars"
+  },
+  "form": {
+    "title": "Persönliche Informationen",
+    "description": "Über mich / Biografie",
+    "alias": "Benutzername / Alias",
+    "aliasPlaceholder": "Ihr Benutzername",
+    "email": "E-Mail-Adresse",
+    "firstname": "Vorname",
+    "firstnamePlaceholder": "Max",
+    "lastname": "Nachname",
+    "lastnamePlaceholder": "Mustermann",
+    "gender": "Geschlecht",
+    "genderPlaceholder": "Geschlecht auswählen",
+    "genderMale": "Männlich",
+    "genderFemale": "Weiblich",
+    "genderUnknown": "Keine Angabe / Divers",
+    "birthday": "Geburtsdatum",
+    "birthdayPlaceholder": "JJJJ-MM-TT",
+    "descriptionPlaceholder": "Erzählen Sie etwas über sich...",
+    "privacyTitle": "Privatsphäre & Einstellungen",
+    "privacyDescription": "Legen Sie fest, welche Informationen öffentlich sichtbar und durchsuchbar sind.",
+    "public": "Öffentliches Profil",
+    "publicDesc": "Ihr Profil ist für andere Benutzer sichtbar.",
+    "searchable": "Profil in Suche auffindbar",
+    "searchableDesc": "Andere Benutzer können Sie über die Suche finden.",
+    "showEmail": "E-Mail öffentlich anzeigen",
+    "showEmailDesc": "Ihre E-Mail-Adresse wird in Ihrem Profil angezeigt.",
+    "showFullName": "Vollständigen Namen anzeigen",
+    "showFullNameDesc": "Ihr vollständiger Vor- und Nachname wird angezeigt anstatt nur der Alias.",
+    "submit": "Änderungen speichern",
+    "submitting": "Wird gespeichert..."
+  },
+  "messages": {
+    "loading": "Kontodaten werden geladen...",
+    "loggingOut": "Sie werden abgemeldet...",
+    "updateSuccess": "Kontodaten erfolgreich gespeichert.",
+    "updateError": "Fehler beim Aktualisieren des Kontos. Bitte versuchen Sie es erneut.",
+    "loadError": "Kontodaten konnten nicht geladen werden."
+  },
+  "validation": {
+    "aliasRequired": "Benutzername ist erforderlich",
+    "aliasMin": "Benutzername muss mindestens {{min}} Zeichen lang sein",
+    "aliasMax": "Benutzername darf maximal {{max}} Zeichen lang sein",
+    "genderRequired": "Geschlecht ist erforderlich",
+    "descriptionMax": "„Über mich“ darf maximal {{max}} Zeichen lang sein",
+    "aliasExists": "Dieser Benutzername ist bereits vergeben"
+  },
+  "settings": "Einstellungen",
+  "teaser": {
+    "alt": "Titelbild",
+    "add": "Titelbild hinzufügen",
+    "change": "Titelbild ändern",
+    "remove": "Titelbild entfernen",
+    "uploading": "Titelbild wird hochgeladen …",
+    "cropTitle": "Titelbild anpassen",
+    "cropDescription": "Wähle den Ausschnitt für dein Titelbild.",
+    "applyAndUpload": "Zuschneiden & Hochladen",
+    "uploadError": "Titelbild konnte nicht hochgeladen werden.",
+    "removeTitle": "Titelbild entfernen?",
+    "removeDescription": "Dein Profil zeigt danach wieder den leeren Hintergrund.",
+    "removed": "Titelbild entfernt.",
+    "removeError": "Titelbild konnte nicht entfernt werden.",
+    "cancel": "Abbrechen"
+  },
+  "groups": {
+    "session": "Sitzung",
+    "sessionDesc": "Angemeldet als @{{alias}}",
+    "danger": "Gefahrenzone"
+  },
+  "ids": {
+    "userId": "Nutzer-ID",
+    "deviceId": "Geräte-ID",
+    "copy": "Kopieren",
+    "copyLabel": "{{label}} kopieren",
+    "copied": "Kopiert",
+    "copyFailed": "Kopieren nicht möglich",
+    "unavailable": "Nicht verfügbar",
+    "hint": "Die Geräte-ID gilt nur für dieses Gerät bzw. diesen Browser."
+  },
+  "native": {
+    "shareId": "Teilen",
+    "birthdayHint": "Format JJJJ-MM-TT, z. B. 1990-05-21",
+    "birthdayInvalid": "Bitte ein gültiges Datum im Format JJJJ-MM-TT eingeben",
+    "descriptionFormatted": "Hinweis: Deine Beschreibung enthält Formatierungen aus der Web-Version. Wenn du sie hier änderst, wird sie als einfacher Text gespeichert.",
+    "avatarWeb": "Avatar und Titelbild kannst du aktuell in der Web-Version ändern.",
+    "deleteCountdown": "Bestätigen möglich in {{count}} s",
+    "deleteFailed": "Konto konnte nicht gelöscht werden. Bitte Passwort prüfen.",
+    "characters": "{{count}} / {{max}} Zeichen"
+  }
+}

@@ -12,6 +12,8 @@ export interface IAuthEventMap {
   'auth:logout:after': { userMeta: IUserMeta | null | undefined; success: boolean };
   /** Öffnet den Abmelde-Dialog (z. B. aus einem Menü). */
   'auth:logout:request': undefined;
+  /** Öffnet den Dialog "Konto löschen" (Web: ExtensionDeleteUser). */
+  'auth:user_deleted_request': undefined;
 }
 
 type Handler<K extends keyof IAuthEventMap> = (payload: IAuthEventMap[K]) => void | Promise<void>;

@@ -61,6 +61,8 @@ export const useForm = <T extends Record<string, string>>(
     values,
     errors,
     field,
+    /** Wert direkt setzen (für Nicht-Textfelder wie Auswahl-Chips). */
+    setValue,
     touchAll,
     submitting,
     setSubmitting,

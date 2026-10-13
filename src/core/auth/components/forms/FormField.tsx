@@ -32,7 +32,10 @@ export const FormField = forwardRef<TextInput, IProps>(
         </Text>
         <View className="relative justify-center">
           {icon && (
-            <View pointerEvents="none" className="absolute left-3.5 z-10">
+            <View
+              pointerEvents="none"
+              className={cn('absolute left-3.5 z-10', inputProps.multiline && 'top-3.5')}
+            >
               <AppIcon name={icon} size={16} color={colors.muted} />
             </View>
           )}
@@ -55,7 +58,8 @@ export const FormField = forwardRef<TextInput, IProps>(
               inputProps.onBlur?.(event);
             }}
             className={cn(
-              'h-12 rounded-xl border bg-background text-base text-foreground',
+              'rounded-xl border bg-background text-base text-foreground',
+              inputProps.multiline ? 'min-h-[140px] py-3' : 'h-12',
               icon ? 'pl-10' : 'pl-3.5',
               password ? 'pr-12' : 'pr-3.5',
               invalid ? 'border-destructive' : focused ? 'border-foreground/40' : 'border-input',

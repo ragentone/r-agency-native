@@ -1,4 +1,5 @@
 export * from './auth.context';
+export * from './AuthDeleteUserDialog';
 export * from './AuthLogoutConfirmDialog';
 export * from './AuthLogoutOverlay';
 export * from './AuthLogoutTrigger';

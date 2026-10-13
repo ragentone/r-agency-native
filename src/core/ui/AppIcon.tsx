@@ -31,6 +31,17 @@ const ICONS = {
   rotate: { ios: 'arrow.counterclockwise', android: 'restart_alt' },
   share: { ios: 'square.and.arrow.up', android: 'share' },
   user: { ios: 'person', android: 'person' },
+  key: { ios: 'key', android: 'key' },
+  fingerprint: { ios: 'touchid', android: 'fingerprint' },
+  trash: { ios: 'trash', android: 'delete' },
+  globe: { ios: 'globe', android: 'public' },
+  search: { ios: 'magnifyingglass', android: 'search' },
+  verified: { ios: 'checkmark.seal.fill', android: 'verified' },
+  calendar: { ios: 'calendar', android: 'calendar_month' },
+  checkbox: { ios: 'checkmark.square.fill', android: 'check_box' },
+  checkboxEmpty: { ios: 'square', android: 'check_box_outline_blank' },
+  chevronRight: { ios: 'chevron.right', android: 'chevron_right' },
+  info: { ios: 'info.circle', android: 'info' },
 } as const;
 
 export type AppIconName = keyof typeof ICONS;

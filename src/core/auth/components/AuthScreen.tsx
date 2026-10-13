@@ -79,6 +79,12 @@ export const AuthScreen = () => {
                     <UIText className="font-bold">{t('page.signedIn.home')}</UIText>
                   </Button>
                 </Link>
+                <Link href="/account" asChild>
+                  <Button variant="outline" className="h-12 rounded-full border-border/50">
+                    <AppIcon name="user" size={16} color={colors.foreground} />
+                    <UIText className="font-bold">{t('page.signedIn.account')}</UIText>
+                  </Button>
+                </Link>
                 <Button variant="ghost" onPress={preLogout} disabled={isLoggingOut} className="h-12 rounded-full">
                   <AppIcon name="logout" size={16} color={colors.muted} />
                   <UIText className="font-bold text-muted-foreground">{t('logout.trigger')}</UIText>
