@@ -65,51 +65,53 @@ export const CreateUserForm = ({ onSuccess }: IProps) => {
     <View className="gap-4">
       <Text className="text-[15px] leading-5 text-muted-foreground">{t('createForm.description')}</Text>
       <FormAlert message={submitError} />
-      <FormField
-        label={t('createForm.alias')}
-        placeholder={t('createForm.aliasPlaceholder')}
-        icon="at"
-        autoComplete="username"
-        textContentType="username"
-        returnKeyType="next"
-        onSubmitEditing={() => emailRef.current?.focus()}
-        editable={!form.submitting}
-        {...aliasField}
-        onBlur={() => {
-          aliasField.onBlur();
-          void checkAlias();
-        }}
-      />
-      <FormField
-        ref={emailRef}
-        label={t('createForm.email')}
-        placeholder={t('createForm.emailPlaceholder')}
-        icon="mail"
-        keyboardType="email-address"
-        autoComplete="email"
-        textContentType="emailAddress"
-        returnKeyType="next"
-        onSubmitEditing={() => passwordRef.current?.focus()}
-        editable={!form.submitting}
-        {...emailField}
-        onBlur={() => {
-          emailField.onBlur();
-          void checkEmail();
-        }}
-      />
-      <FormField
-        ref={passwordRef}
-        label={t('createForm.password')}
-        placeholder={t('createForm.passwordPlaceholder')}
-        icon="lock"
-        password
-        autoComplete="new-password"
-        textContentType="newPassword"
-        returnKeyType="go"
-        onSubmitEditing={submit}
-        editable={!form.submitting}
-        {...form.field('password')}
-      />
+      <View key={form.formKey} className="gap-4">
+        <FormField
+          label={t('createForm.alias')}
+          placeholder={t('createForm.aliasPlaceholder')}
+          icon="at"
+          autoComplete="username"
+          textContentType="username"
+          returnKeyType="next"
+          onSubmitEditing={() => emailRef.current?.focus()}
+          editable={!form.submitting}
+          {...aliasField}
+          onBlur={() => {
+            aliasField.onBlur();
+            void checkAlias();
+          }}
+        />
+        <FormField
+          ref={emailRef}
+          label={t('createForm.email')}
+          placeholder={t('createForm.emailPlaceholder')}
+          icon="mail"
+          keyboardType="email-address"
+          autoComplete="email"
+          textContentType="emailAddress"
+          returnKeyType="next"
+          onSubmitEditing={() => passwordRef.current?.focus()}
+          editable={!form.submitting}
+          {...emailField}
+          onBlur={() => {
+            emailField.onBlur();
+            void checkEmail();
+          }}
+        />
+        <FormField
+          ref={passwordRef}
+          label={t('createForm.password')}
+          placeholder={t('createForm.passwordPlaceholder')}
+          icon="lock"
+          password
+          autoComplete="new-password"
+          textContentType="newPassword"
+          returnKeyType="go"
+          onSubmitEditing={submit}
+          editable={!form.submitting}
+          {...form.field('password')}
+        />
+      </View>
       <SubmitButton
         label={t('createForm.submit')}
         pendingLabel={t('createForm.submitting')}

@@ -41,18 +41,20 @@ export const ResetPasswordForm = ({ onSuccess }: IProps) => {
         {t('resetPasswordForm.description')}
       </Text>
       <FormAlert message={submitError} />
-      <FormField
-        label={t('resetPasswordForm.email')}
-        placeholder={t('resetPasswordForm.emailPlaceholder')}
-        icon="mail"
-        keyboardType="email-address"
-        autoComplete="email"
-        textContentType="emailAddress"
-        returnKeyType="send"
-        onSubmitEditing={submit}
-        editable={!form.submitting}
-        {...form.field('email')}
-      />
+      <View key={form.formKey} className="gap-4">
+        <FormField
+          label={t('resetPasswordForm.email')}
+          placeholder={t('resetPasswordForm.emailPlaceholder')}
+          icon="mail"
+          keyboardType="email-address"
+          autoComplete="email"
+          textContentType="emailAddress"
+          returnKeyType="send"
+          onSubmitEditing={submit}
+          editable={!form.submitting}
+          {...form.field('email')}
+        />
+      </View>
       <SubmitButton
         label={t('resetPasswordForm.submit')}
         pendingLabel={t('resetPasswordForm.submitting')}

@@ -1,19 +1,28 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import type { FieldErrors } from '../../validation';
 
 /**
  * Minimaler Formular-State (statt Formik): Werte, Fehler, "berührt", Absenden.
  * Fehler werden – wie bei Formik – erst nach Verlassen des Feldes bzw. beim Absenden gezeigt.
+ *
+ * Die Felder sind bewusst *unkontrolliert* (`defaultValue` statt `value`): Auf Android schreibt
+ * ein kontrolliertes TextInput den Wert bei jedem Tastendruck zurück ins native Feld und kann so
+ * Zeichen verlieren, mit denen die Tastatur ein Wort abschließt (z. B. "@" oder "."). Der Text
+ * bleibt im nativen Feld, React liest ihn nur mit. Zum Leeren wird `formKey` erhöht – das Formular
+ * hängt ihn als `key` an die Felder und erzeugt sie neu.
  */
 export const useForm = <T extends Record<string, string>>(
   initialValues: T,
   validate: (values: T) => FieldErrors<T>
 ) => {
+  // Startwerte festhalten: `defaultValue` darf sich nach dem ersten Rendern nicht ändern.
+  const initialRef = useRef(initialValues);
   const [values, setValues] = useState<T>(initialValues);
   const [touched, setTouched] = useState<Partial<Record<keyof T, boolean>>>({});
   const [extraErrors, setExtraErrors] = useState<FieldErrors<T>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [formKey, setFormKey] = useState(0);
 
   const errors: FieldErrors<T> = { ...validate(values), ...extraErrors };
 
@@ -33,19 +42,22 @@ export const useForm = <T extends Record<string, string>>(
   };
 
   const field = (name: keyof T) => ({
-    value: values[name],
+    defaultValue: initialRef.current[name],
     onChangeText: (text: string) => setValue(name, text),
     onBlur: () => blur(name),
     error: errorOf(name),
   });
 
   const reset = () => {
-    setValues(initialValues);
+    setValues(initialRef.current);
     setTouched({});
     setExtraErrors({});
+    setFormKey(key => key + 1);
   };
 
   return {
+    /** Als `key` um die Felder legen – ändert sich bei `reset()`. */
+    formKey,
     values,
     errors,
     field,
