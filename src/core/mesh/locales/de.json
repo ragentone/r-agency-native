@@ -1,0 +1,50 @@
+{
+  "loading": {
+    "title": "Mesh-Netzwerk wird verbunden",
+    "description": "Stelle sichere Echtzeitverbindung zum Mesh-Netzwerk her. Bitte einen kurzen Moment Geduld...",
+    "progress": "Verbindungsfortschritt",
+    "steps": {
+      "initWebsocket": "WebSocket initialisieren",
+      "authEndpoint": "Endpunkt autorisieren",
+      "syncTopology": "Mesh-Topologie synchronisieren",
+      "activateChannel": "Echtzeit-Kanal aktivieren"
+    }
+  },
+  "error": {
+    "title": {
+      "reconnecting": "Mesh-Verbindung wird wiederhergestellt",
+      "disconnected": "Mesh-Verbindung getrennt",
+      "failed": "Mesh-Verbindungsfehler"
+    },
+    "description": {
+      "reconnecting": "Der Client versucht automatisch, die Verbindung zum Mesh-Netzwerk erneut aufzubauen.",
+      "disconnected": "Die Verbindung zum Mesh-Server wurde unterbrochen. Daten werden synchronisiert, sobald die Verbindung wieder aktiv ist.",
+      "failed": "Es konnte keine Verbindung zum Mesh-Server aufgebaut werden. Bitte prüfe deine Netzwerkverbindung oder versuche es erneut."
+    },
+    "messages": {
+      "disconnected": "Die Verbindung zum Mesh-Server wurde unerwartet getrennt.",
+      "failed": "Verbindung zum Mesh-Netzwerk konnte nicht hergestellt werden.",
+      "missingEndpoint": "Kein Mesh-Endpoint konfiguriert (EXPO_PUBLIC_MESH_SERVER_ENDPOINT)."
+    },
+    "diagnostics": {
+      "title": "Technische Details & Diagnose",
+      "endpoint": "Endpoint",
+      "status": "Status",
+      "retries": "Retries",
+      "retryCount": "Retry Count:",
+      "copy": "Diagnosedaten kopieren",
+      "copied": "Kopiert!",
+      "share": "Diagnosedaten teilen"
+    },
+    "actions": {
+      "reconnecting": "Verbindung wird aufgebaut...",
+      "retry": "Jetzt neu verbinden",
+      "reload": "Neu laden",
+      "restart": "App neu starten"
+    }
+  },
+  "banner": {
+    "reconnecting": "Verbindung wird wiederhergestellt …",
+    "retry": "Erneut versuchen"
+  }
+}

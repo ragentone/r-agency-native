@@ -1,0 +1,50 @@
+{
+  "loading": {
+    "title": "Connecting to Mesh Network",
+    "description": "Establishing a secure real-time connection to the mesh network. Please hold on a moment...",
+    "progress": "Connection Progress",
+    "steps": {
+      "initWebsocket": "Initialize WebSocket",
+      "authEndpoint": "Authorize endpoint",
+      "syncTopology": "Synchronize mesh topology",
+      "activateChannel": "Activate real-time channel"
+    }
+  },
+  "error": {
+    "title": {
+      "reconnecting": "Reconnecting to Mesh",
+      "disconnected": "Mesh Connection Disconnected",
+      "failed": "Mesh Connection Error"
+    },
+    "description": {
+      "reconnecting": "The client is automatically attempting to re-establish the connection to the mesh network.",
+      "disconnected": "Connection to the mesh server was interrupted. Data will synchronize once reconnected.",
+      "failed": "Could not connect to the mesh server. Please check your network connection or try again."
+    },
+    "messages": {
+      "disconnected": "The connection to the mesh server was unexpectedly terminated.",
+      "failed": "Failed to establish a connection to the mesh network.",
+      "missingEndpoint": "No mesh endpoint configured (EXPO_PUBLIC_MESH_SERVER_ENDPOINT)."
+    },
+    "diagnostics": {
+      "title": "Technical Details & Diagnostics",
+      "endpoint": "Endpoint",
+      "status": "Status",
+      "retries": "Retries",
+      "retryCount": "Retry Count:",
+      "copy": "Copy diagnostic details",
+      "copied": "Copied!",
+      "share": "Share diagnostic details"
+    },
+    "actions": {
+      "reconnecting": "Connecting...",
+      "retry": "Reconnect now",
+      "reload": "Reload page",
+      "restart": "Restart app"
+    }
+  },
+  "banner": {
+    "reconnecting": "Reconnecting …",
+    "retry": "Retry"
+  }
+}
