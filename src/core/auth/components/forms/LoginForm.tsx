@@ -1,5 +1,8 @@
+import { LockIcon, MailIcon } from 'lucide-react-native';
 import { useRef, useState } from 'react';
-import { Text, type TextInput, View } from 'react-native';
+import { type TextInput, View } from 'react-native';
+import { Separator } from '@/components/ui/separator';
+import { Text } from '@/components/ui/text';
 
 import { useAuthTranslation, toErrorMessage } from '../../i18n';
 import { validateLogin } from '../../validation';
@@ -43,12 +46,12 @@ export const LoginForm = ({ onSuccess, showGoogleAuth = true }: IProps) => {
 
   return (
     <View className="gap-4">
-      <Text className="text-[15px] leading-5 text-muted-foreground">{t('form.description')}</Text>
+      <Text variant="muted">{t('form.description')}</Text>
       <FormAlert message={submitError} />
       <FormField
         label={t('form.email')}
         placeholder={t('form.emailPlaceholder')}
-        icon="mail"
+        icon={MailIcon}
         keyboardType="email-address"
         autoComplete="email"
         textContentType="emailAddress"
@@ -61,7 +64,7 @@ export const LoginForm = ({ onSuccess, showGoogleAuth = true }: IProps) => {
         ref={passwordRef}
         label={t('form.password')}
         placeholder={t('form.passwordPlaceholder')}
-        icon="lock"
+        icon={LockIcon}
         password
         autoComplete="current-password"
         textContentType="password"
@@ -80,9 +83,9 @@ export const LoginForm = ({ onSuccess, showGoogleAuth = true }: IProps) => {
       {showGoogleAuth && (
         <>
           <View className="flex-row items-center gap-3">
-            <View className="h-px flex-1 bg-border" />
-            <Text className="text-[15px] text-muted-foreground">{t('form.or')}</Text>
-            <View className="h-px flex-1 bg-border" />
+            <Separator className="flex-1" />
+            <Text variant="muted">{t('form.or')}</Text>
+            <Separator className="flex-1" />
           </View>
           <GoogleButton onSuccess={onSuccess} onError={setSubmitError} />
         </>

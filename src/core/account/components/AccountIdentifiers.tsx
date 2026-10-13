@@ -1,10 +1,13 @@
+import { Share2Icon } from 'lucide-react-native';
 import { getDeviceId, getMeshClient } from 'r-agency-mesh-client-v1/release';
 import { useEffect, useState } from 'react';
-import { Pressable, Share, Text, View } from 'react-native';
+import { Share, View } from 'react-native';
 
-import { useThemeColors } from '@/core/theme/colors';
-import { AppIcon } from '@/core/ui/AppIcon';
-import { MONO_FONT } from '@/core/mesh/components/mesh.ui';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Icon } from '@/components/ui/icon';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Text } from '@/components/ui/text';
 
 import { useAccountTranslation } from '../i18n';
 
@@ -36,33 +39,31 @@ const useDeviceId = () => {
 
 const IdRow = ({ label, value, loading }: { label: string; value: string | null; loading?: boolean }) => {
   const { t } = useAccountTranslation();
-  const colors = useThemeColors();
   return (
-    <View className="flex-row items-center gap-2 rounded-xl border border-border/50 py-2 pl-3 pr-1.5">
+    <Card className="flex-row items-center gap-2 rounded-xl py-2 pl-3 pr-1.5 shadow-none">
       <View className="flex-1">
-        <Text className="text-xs font-medium leading-4 text-muted-foreground">{label}</Text>
+        <Text variant="muted" className="text-xs font-medium">
+          {label}
+        </Text>
         {loading ? (
-          <View className="mt-1 h-4 w-40 rounded-full bg-foreground/10" />
+          <Skeleton className="mt-1 h-4 w-40 rounded-full" />
         ) : (
-          <Text
-            selectable
-            className={value ? 'mt-0.5 text-[13px] leading-5 text-foreground' : 'mt-0.5 text-[13px] text-muted-foreground'}
-            style={{ fontFamily: MONO_FONT }}
-          >
+          <Text selectable variant="code" className="mt-1 self-start bg-transparent px-0 text-[13px] font-normal">
             {value ?? t('ids.unavailable')}
           </Text>
         )}
       </View>
-      <Pressable
-        accessibilityRole="button"
+      <Button
+        variant="ghost"
+        size="icon"
         accessibilityLabel={`${label} – ${t('native.shareId')}`}
         disabled={!value}
         onPress={() => value && void Share.share({ message: value })}
-        className="h-10 w-10 items-center justify-center rounded-full active:bg-foreground/10 disabled:opacity-40"
+        className="rounded-full"
       >
-        <AppIcon name="share" size={16} color={colors.muted} />
-      </Pressable>
-    </View>
+        <Icon as={Share2Icon} size={16} className="text-muted-foreground" />
+      </Button>
+    </Card>
   );
 };
 
@@ -74,7 +75,9 @@ export const AccountIdentifiers = ({ userId }: { userId: string }) => {
     <View className="gap-2">
       <IdRow label={t('ids.userId')} value={userId || null} />
       <IdRow label={t('ids.deviceId')} value={deviceId} loading={loading && !deviceId} />
-      <Text className="px-1 pt-1 text-xs leading-4 text-muted-foreground">{t('ids.hint')}</Text>
+      <Text variant="muted" className="px-1 pt-1 text-xs">
+        {t('ids.hint')}
+      </Text>
     </View>
   );
 };

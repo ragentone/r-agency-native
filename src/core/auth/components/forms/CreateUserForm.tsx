@@ -1,5 +1,7 @@
+import { AtSignIcon, LockIcon, MailIcon } from 'lucide-react-native';
 import { useRef, useState } from 'react';
-import { Text, type TextInput, View } from 'react-native';
+import { type TextInput, View } from 'react-native';
+import { Text } from '@/components/ui/text';
 
 import { useUserCreate } from '../../hooks';
 import { toErrorMessage, useAuthTranslation } from '../../i18n';
@@ -63,13 +65,13 @@ export const CreateUserForm = ({ onSuccess }: IProps) => {
 
   return (
     <View className="gap-4">
-      <Text className="text-[15px] leading-5 text-muted-foreground">{t('createForm.description')}</Text>
+      <Text variant="muted">{t('createForm.description')}</Text>
       <FormAlert message={submitError} />
       <View key={form.formKey} className="gap-4">
         <FormField
           label={t('createForm.alias')}
           placeholder={t('createForm.aliasPlaceholder')}
-          icon="at"
+          icon={AtSignIcon}
           autoComplete="username"
           textContentType="username"
           returnKeyType="next"
@@ -85,7 +87,7 @@ export const CreateUserForm = ({ onSuccess }: IProps) => {
           ref={emailRef}
           label={t('createForm.email')}
           placeholder={t('createForm.emailPlaceholder')}
-          icon="mail"
+          icon={MailIcon}
           keyboardType="email-address"
           autoComplete="email"
           textContentType="emailAddress"
@@ -102,7 +104,7 @@ export const CreateUserForm = ({ onSuccess }: IProps) => {
           ref={passwordRef}
           label={t('createForm.password')}
           placeholder={t('createForm.passwordPlaceholder')}
-          icon="lock"
+          icon={LockIcon}
           password
           autoComplete="new-password"
           textContentType="newPassword"

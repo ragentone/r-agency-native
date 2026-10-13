@@ -1,7 +1,5 @@
-import { Image } from 'expo-image';
-import { useState } from 'react';
-import { Text, View } from 'react-native';
-
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Text } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 
 interface IProps {
@@ -11,32 +9,17 @@ interface IProps {
   className?: string;
 }
 
-/** Avatar mit Initialen als Fallback (Web: shadcn Avatar). */
+/** Avatar mit Initialen als Fallback (Reusables `Avatar`). */
 export const UserAvatar = ({ name, avatarUrl, size = 40, className }: IProps) => {
-  const [failed, setFailed] = useState(false);
   const initials = (name || 'U').slice(0, 2).toUpperCase();
-
   return (
-    <View
-      className={cn('items-center justify-center overflow-hidden rounded-full bg-muted', className)}
-      style={{ width: size, height: size }}
-    >
-      {avatarUrl && !failed ? (
-        <Image
-          source={{ uri: avatarUrl }}
-          style={{ width: size, height: size }}
-          contentFit="cover"
-          onError={() => setFailed(true)}
-          accessibilityIgnoresInvertColors
-        />
-      ) : (
-        <Text
-          className="font-semibold text-foreground"
-          style={{ fontSize: Math.max(11, Math.round(size * 0.32)) }}
-        >
+    <Avatar alt={name || 'Avatar'} className={cn(className)} style={{ width: size, height: size }}>
+      {avatarUrl ? <AvatarImage source={{ uri: avatarUrl }} /> : null}
+      <AvatarFallback>
+        <Text className="font-semibold" style={{ fontSize: Math.max(11, Math.round(size * 0.32)) }}>
           {initials}
         </Text>
-      )}
-    </View>
+      </AvatarFallback>
+    </Avatar>
   );
 };

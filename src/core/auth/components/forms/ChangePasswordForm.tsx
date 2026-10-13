@@ -1,3 +1,4 @@
+import { KeyRoundIcon, LockIcon } from 'lucide-react-native';
 import { useRef, useState } from 'react';
 import { type TextInput, View } from 'react-native';
 
@@ -63,7 +64,7 @@ export const ChangePasswordForm = ({ userId, onSuccess }: IProps) => {
         <FormField
           label={t('changePasswordForm.currentPassword')}
           placeholder={t('changePasswordForm.currentPasswordPlaceholder')}
-          icon="lock"
+          icon={LockIcon}
           password
           autoComplete="current-password"
           textContentType="password"
@@ -76,7 +77,7 @@ export const ChangePasswordForm = ({ userId, onSuccess }: IProps) => {
           ref={newRef}
           label={t('changePasswordForm.newPassword')}
           placeholder={t('changePasswordForm.newPasswordPlaceholder')}
-          icon="key"
+          icon={KeyRoundIcon}
           password
           autoComplete="new-password"
           textContentType="newPassword"
@@ -89,7 +90,7 @@ export const ChangePasswordForm = ({ userId, onSuccess }: IProps) => {
           ref={confirmRef}
           label={t('changePasswordForm.confirmPassword')}
           placeholder={t('changePasswordForm.confirmPasswordPlaceholder')}
-          icon="key"
+          icon={KeyRoundIcon}
           password
           autoComplete="new-password"
           textContentType="newPassword"

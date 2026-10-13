@@ -1,9 +1,16 @@
+import { CheckIcon } from 'lucide-react-native';
 import { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Modal, Text, View } from 'react-native';
-import Animated, { FadeIn, ZoomIn } from 'react-native-reanimated';
+import { View } from 'react-native';
 
-import { useThemeColors } from '@/core/theme/colors';
-import { AppIcon } from '@/core/ui/AppIcon';
+import { Spinner } from '@/components/app/spinner';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { Icon } from '@/components/ui/icon';
 
 import { useAuthTranslation } from '../i18n';
 import { UserAvatar } from './UserAvatar';
@@ -19,14 +26,14 @@ type Phase = 'hidden' | 'leaving' | 'goodbye';
 
 /** Mindestens so lange sichtbar, damit schnelle Logouts nicht flackern. */
 const MIN_VISIBLE_MS = 900;
-const GOODBYE_MS = 650;
+const GOODBYE_MS = 1250;
 
 /**
- * Vollbild-Overlay beim Abmelden: "Wird abgemeldet …" → "Bis bald, Name!" → ausblenden.
+ * Status beim Abmelden: "Wird abgemeldet …" → "Bis bald, Name!" → ausblenden.
+ * Als Reusables `AlertDialog` ohne Buttons (nicht wegklickbar).
  */
 export const AuthLogoutOverlay = ({ active, name, avatarUrl, signedOut }: IProps) => {
   const { t } = useAuthTranslation();
-  const colors = useThemeColors();
   const [phase, setPhase] = useState<Phase>('hidden');
   const [snapshot, setSnapshot] = useState<{ name?: string; avatarUrl?: string | null }>({});
   const shownAt = useRef(0);
@@ -56,7 +63,7 @@ export const AuthLogoutOverlay = ({ active, name, avatarUrl, signedOut }: IProps
     const hide = setTimeout(() => {
       shownAt.current = 0;
       setPhase('hidden');
-    }, GOODBYE_MS + 600);
+    }, GOODBYE_MS);
     return () => clearTimeout(hide);
   }, [phase]);
 
@@ -64,44 +71,31 @@ export const AuthLogoutOverlay = ({ active, name, avatarUrl, signedOut }: IProps
   const displayName = snapshot.name;
 
   return (
-    <Modal visible={phase !== 'hidden'} transparent animationType="fade" statusBarTranslucent>
-      <View
-        accessibilityRole="alert"
-        accessibilityLiveRegion="polite"
-        className="flex-1 items-center justify-center gap-5 bg-background/95 px-6"
-      >
+    <AlertDialog open={phase !== 'hidden'}>
+      <AlertDialogContent className="w-[90vw] max-w-xs items-center gap-5 py-8">
         <View className="h-24 w-24 items-center justify-center">
-          {!goodbye && (
-            <View style={{ position: 'absolute' }}>
-              <ActivityIndicator size="large" color={colors.foreground} style={{ transform: [{ scale: 1.9 }] }} />
-            </View>
-          )}
           <UserAvatar name={displayName} avatarUrl={snapshot.avatarUrl} size={72} />
-          {goodbye && (
-            <Animated.View
-              entering={ZoomIn.springify()}
-              style={{ position: 'absolute', right: 4, bottom: 4 }}
-            >
-              <View className="h-7 w-7 items-center justify-center rounded-full bg-foreground">
-                <AppIcon name="check" size={14} color={colors.background} />
-              </View>
-            </Animated.View>
-          )}
+          <View className="absolute bottom-1 right-1 h-7 w-7 items-center justify-center rounded-full bg-foreground">
+            {goodbye ? (
+              <Icon as={CheckIcon} size={14} className="text-background" />
+            ) : (
+              <Spinner size={14} className="text-background" />
+            )}
+          </View>
         </View>
-
-        <Animated.View key={phase} entering={FadeIn.duration(250)} style={{ alignItems: 'center', gap: 4 }}>
-          <Text className="text-center text-xl font-bold tracking-tight text-foreground">
+        <AlertDialogHeader className="items-center">
+          <AlertDialogTitle className="text-center">
             {goodbye
               ? displayName
                 ? t('logout.goodbyeName', { name: displayName })
                 : t('logout.goodbye')
               : t('logout.loggingOut')}
-          </Text>
-          <Text className="text-center text-sm text-muted-foreground">
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-center">
             {goodbye ? t('logout.goodbyeHint') : t('logout.overlayHint')}
-          </Text>
-        </Animated.View>
-      </View>
-    </Modal>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

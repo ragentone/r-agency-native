@@ -1,9 +1,18 @@
-import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Modal, Pressable, Text, View } from 'react-native';
+import { LockIcon } from 'lucide-react-native';
+import { useEffect, useState } from 'react';
 
+import { Spinner } from '@/components/app/spinner';
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Text as UIText } from '@/components/ui/text';
-import { useThemeColors } from '@/core/theme/colors';
+import { Text } from '@/components/ui/text';
 
 import { authEvents } from '../auth.events';
 import { useUserDelete } from '../hooks';
@@ -15,12 +24,11 @@ import { useAuth } from './use.auth';
 const COUNTDOWN_SECONDS = 5;
 
 /**
- * Konto endgültig löschen (Web: ExtensionDeleteUser). Öffnet sich über das Event
- * `auth:user_deleted_request`; Bestätigen erst nach 5 s, bei Passwort-Konten mit Passwort.
+ * Konto endgültig löschen (Web: ExtensionDeleteUser) als Reusables `AlertDialog`.
+ * Öffnet sich über `auth:user_deleted_request`; Bestätigen erst nach 5 s, bei Passwort-Konten mit Passwort.
  */
 export const AuthDeleteUserDialog = () => {
   const { t, has } = useAuthTranslation();
-  const colors = useThemeColors();
   const { userMeta, destroy } = useAuth();
   const { deleteUser } = useUserDelete();
   const [open, setOpen] = useState(false);
@@ -47,10 +55,6 @@ export const AuthDeleteUserDialog = () => {
     return () => clearTimeout(timer);
   }, [open, countdown]);
 
-  const close = useCallback(() => {
-    if (!progress) setOpen(false);
-  }, [progress]);
-
   const confirm = async () => {
     setError(null);
     setProgress(true);
@@ -70,44 +74,36 @@ export const AuthDeleteUserDialog = () => {
   const disabled = countdown > 0 || progress || (needsPassword && !password);
 
   return (
-    <Modal visible={open} transparent animationType="fade" onRequestClose={close} statusBarTranslucent>
-      <View className="flex-1 items-center justify-center px-6">
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={t('deleteDialog.cancel')}
-          onPress={close}
-          className="absolute inset-0 bg-black/50"
-        />
-        <View accessibilityViewIsModal className="w-full max-w-sm gap-4 rounded-2xl bg-background p-6">
-          <View className="gap-1.5">
-            <Text className="text-lg font-bold text-destructive">{t('deleteDialog.title')}</Text>
-            <Text className="text-sm leading-5 text-muted-foreground">{t('deleteDialog.description')}</Text>
-          </View>
-          <FormAlert message={error} />
-          {needsPassword && (
-            <FormField
-              label={t('deleteDialog.password')}
-              placeholder={t('deleteUserForm.passwordPlaceholder')}
-              icon="lock"
-              password
-              autoComplete="current-password"
-              editable={countdown <= 0 && !progress}
-              onChangeText={setPassword}
-            />
-          )}
-          <View className="gap-2.5">
-            <Button variant="destructive" onPress={confirm} disabled={disabled} className="h-11 rounded-full">
-              {progress && <ActivityIndicator size="small" color="#fff" />}
-              <UIText>
-                {countdown > 0 ? `${t('deleteDialog.confirm')} (${countdown})` : t('deleteDialog.confirm')}
-              </UIText>
-            </Button>
-            <Button variant="outline" onPress={close} disabled={progress} className="h-11 rounded-full">
-              <UIText style={{ color: colors.foreground }}>{t('deleteDialog.cancel')}</UIText>
-            </Button>
-          </View>
-        </View>
-      </View>
-    </Modal>
+    <AlertDialog open={open} onOpenChange={next => !progress && setOpen(next)}>
+      <AlertDialogContent className="w-[90vw] max-w-sm">
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-destructive">{t('deleteDialog.title')}</AlertDialogTitle>
+          <AlertDialogDescription>{t('deleteDialog.description')}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <FormAlert message={error} />
+        {needsPassword && (
+          <FormField
+            label={t('deleteDialog.password')}
+            placeholder={t('deleteUserForm.passwordPlaceholder')}
+            icon={LockIcon}
+            password
+            autoComplete="current-password"
+            editable={countdown <= 0 && !progress}
+            onChangeText={setPassword}
+          />
+        )}
+        <AlertDialogFooter>
+          <AlertDialogCancel disabled={progress}>
+            <Text>{t('deleteDialog.cancel')}</Text>
+          </AlertDialogCancel>
+          <Button variant="destructive" onPress={confirm} disabled={disabled}>
+            {progress && <Spinner />}
+            <Text>
+              {countdown > 0 ? `${t('deleteDialog.confirm')} (${countdown})` : t('deleteDialog.confirm')}
+            </Text>
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

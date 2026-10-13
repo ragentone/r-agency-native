@@ -1,11 +1,15 @@
+import { AtSignIcon, CalendarIcon, MailIcon, UserRoundIcon } from 'lucide-react-native';
 import { useMemo, useRef, useState } from 'react';
-import { Pressable, Text, type TextInput, View } from 'react-native';
+import { type TextInput, View } from 'react-native';
 
 import { FormAlert } from '@/core/auth/components/forms/FormAlert';
 import { FormField } from '@/core/auth/components/forms/FormField';
 import { SubmitButton } from '@/core/auth/components/forms/SubmitButton';
 import { useForm } from '@/core/auth/components/forms/use.form';
 import { toErrorMessage, useAuthTranslation } from '@/core/auth/i18n';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Text } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 
 import { useAccountTranslation } from '../i18n';
@@ -110,7 +114,7 @@ export const AccountProfileForm = ({ account, onSuccess }: IProps) => {
       <FormField
         label={t('form.alias')}
         placeholder={t('form.aliasPlaceholder')}
-        icon="at"
+        icon={AtSignIcon}
         autoComplete="username"
         maxLength={32}
         returnKeyType="next"
@@ -122,12 +126,12 @@ export const AccountProfileForm = ({ account, onSuccess }: IProps) => {
           void checkAlias();
         }}
       />
-      <FormField label={t('form.email')} icon="mail" defaultValue={account.email} editable={false} />
+      <FormField label={t('form.email')} icon={MailIcon} defaultValue={account.email} editable={false} />
       <FormField
         ref={firstnameRef}
         label={t('form.firstname')}
         placeholder={t('form.firstnamePlaceholder')}
-        icon="user"
+        icon={UserRoundIcon}
         autoCapitalize="words"
         autoComplete="given-name"
         returnKeyType="next"
@@ -139,7 +143,7 @@ export const AccountProfileForm = ({ account, onSuccess }: IProps) => {
         ref={lastnameRef}
         label={t('form.lastname')}
         placeholder={t('form.lastnamePlaceholder')}
-        icon="user"
+        icon={UserRoundIcon}
         autoComplete="family-name"
         returnKeyType="next"
         onSubmitEditing={() => birthdayRef.current?.focus()}
@@ -148,29 +152,23 @@ export const AccountProfileForm = ({ account, onSuccess }: IProps) => {
       />
 
       <View className="gap-2">
-        <Text className="text-sm font-medium text-foreground">{t('form.gender')}</Text>
-        <View accessibilityRole="radiogroup" className="flex-row flex-wrap gap-2">
-          {GENDERS.map(gender => {
-            const selected = form.values.gender === gender;
-            return (
-              <Pressable
-                key={gender}
-                accessibilityRole="radio"
-                accessibilityState={{ selected, disabled: form.submitting }}
-                disabled={form.submitting}
-                onPress={() => form.setValue('gender', gender)}
-                className={cn(
-                  'h-10 justify-center rounded-full border px-4',
-                  selected ? 'border-foreground bg-foreground' : 'border-border bg-background active:bg-foreground/5'
-                )}
-              >
-                <Text className={cn('text-sm font-medium', selected ? 'text-background' : 'text-foreground')}>
-                  {t(GENDER_LABEL[gender])}
-                </Text>
-              </Pressable>
-            );
-          })}
-        </View>
+        <Label nativeID="account-gender">{t('form.gender')}</Label>
+        <RadioGroup
+          aria-labelledby="account-gender"
+          value={form.values.gender}
+          onValueChange={value => form.setValue('gender', value)}
+          disabled={form.submitting}
+          className="gap-3"
+        >
+          {GENDERS.map(gender => (
+            <View key={gender} className="flex-row items-center gap-3">
+              <RadioGroupItem value={gender} aria-labelledby={`gender-${gender}`} />
+              <Label nativeID={`gender-${gender}`} onPress={() => form.setValue('gender', gender)}>
+                {t(GENDER_LABEL[gender])}
+              </Label>
+            </View>
+          ))}
+        </RadioGroup>
       </View>
 
       <View className="gap-1.5">
@@ -178,21 +176,22 @@ export const AccountProfileForm = ({ account, onSuccess }: IProps) => {
           ref={birthdayRef}
           label={t('form.birthday')}
           placeholder={t('form.birthdayPlaceholder')}
-          icon="calendar"
+          icon={CalendarIcon}
           keyboardType="numbers-and-punctuation"
           maxLength={10}
           editable={!form.submitting}
           {...form.field('birthday')}
         />
-        <Text className="text-xs text-muted-foreground">{t('native.birthdayHint')}</Text>
+        <Text variant="muted" className="text-xs">
+          {t('native.birthdayHint')}
+        </Text>
       </View>
 
       <View className="gap-1.5">
         <FormField
           label={t('form.description')}
           placeholder={t('form.descriptionPlaceholder')}
-          multiline
-          textAlignVertical="top"
+          textarea
           autoCapitalize="sentences"
           autoCorrect
           editable={!form.submitting}
@@ -206,7 +205,11 @@ export const AccountProfileForm = ({ account, onSuccess }: IProps) => {
         >
           {t('native.characters', { count: descriptionLength, max: ACCOUNT_DESCRIPTION_MAX_LENGTH })}
         </Text>
-        {richFormatting && <Text className="text-xs leading-4 text-muted-foreground">{t('native.descriptionFormatted')}</Text>}
+        {richFormatting && (
+          <Text variant="muted" className="text-xs">
+            {t('native.descriptionFormatted')}
+          </Text>
+        )}
       </View>
 
       <SubmitButton label={t('form.submit')} pendingLabel={t('form.submitting')} pending={form.submitting} onPress={submit} />

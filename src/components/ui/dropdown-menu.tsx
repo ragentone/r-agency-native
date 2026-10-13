@@ -103,7 +103,8 @@ function DropdownMenuContent({
       <FullWindowOverlay>
         <DropdownMenuPrimitive.Overlay
           style={Platform.select({
-            web: overlayStyle ?? undefined,
+            // Typ-Anpassung für RN 0.86 (StyleProp ist keine reine ViewStyle)
+            web: (overlayStyle ?? undefined) as typeof StyleSheet.absoluteFill | undefined,
             native: overlayStyle
               ? StyleSheet.flatten([
                 StyleSheet.absoluteFill,

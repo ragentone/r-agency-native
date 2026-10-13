@@ -1,5 +1,7 @@
+import { MailIcon } from 'lucide-react-native';
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '@/components/ui/text';
 
 import { useUserPassword } from '../../hooks';
 import { toErrorMessage, useAuthTranslation } from '../../i18n';
@@ -37,15 +39,13 @@ export const ResetPasswordForm = ({ onSuccess }: IProps) => {
 
   return (
     <View className="gap-4">
-      <Text className="text-[15px] leading-5 text-muted-foreground">
-        {t('resetPasswordForm.description')}
-      </Text>
+      <Text variant="muted">{t('resetPasswordForm.description')}</Text>
       <FormAlert message={submitError} />
       <View key={form.formKey} className="gap-4">
         <FormField
           label={t('resetPasswordForm.email')}
           placeholder={t('resetPasswordForm.emailPlaceholder')}
-          icon="mail"
+          icon={MailIcon}
           keyboardType="email-address"
           autoComplete="email"
           textContentType="emailAddress"

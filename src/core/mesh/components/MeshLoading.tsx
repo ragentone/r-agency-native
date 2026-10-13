@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Image, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Image, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -14,11 +14,14 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { Progress } from '@/components/ui/progress';
+import { Text } from '@/components/ui/text';
+import { useThemeColors } from '@/core/theme/colors';
 import { cn } from '@/lib/utils';
 
 import { MESH_SERVER_ENDPOINT } from '../config';
 import { useMeshTranslation } from '../i18n';
-import { MONO_FONT, useMeshColors } from './mesh.ui';
+import { MONO_FONT } from './mesh.ui';
 import { useOptionalMeshState } from './use.mesh';
 
 export interface MeshLoadingProps {
@@ -33,8 +36,6 @@ export interface MeshLoadingProps {
 const LOGO = require('@/assets/images/mesh-logo.png');
 const LOGO_DARK = require('@/assets/images/mesh-logo-dark.png');
 
-const BAR_WIDTH = 160;
-const BAR_FILL = BAR_WIDTH * 0.4;
 
 /** Pulsierender Ring hinter dem Logo. */
 const PulseRing = ({ delay, color }: { delay: number; color: string }) => {
@@ -79,7 +80,7 @@ const MeshLoading = ({
   const { t } = useMeshTranslation();
   const reduceMotion = useReducedMotion();
   const insets = useSafeAreaInsets();
-  const colors = useMeshColors();
+  const colors = useThemeColors();
   const contextState = useOptionalMeshState();
 
   const status = propStatus ?? contextState?.status ?? 'connecting';
@@ -88,8 +89,15 @@ const MeshLoading = ({
   const title = propTitle || t('loading.title');
   const description = propDescription || t('loading.description');
 
+  // Unbestimmter Fortschritt: 0 → 100 in Schleife (bei reduzierter Bewegung fest auf 40 %).
+  const [progress, setProgress] = useState(reduceMotion ? 40 : 0);
+  useEffect(() => {
+    if (reduceMotion) return;
+    const timer = setInterval(() => setProgress(value => (value >= 100 ? 0 : value + 10)), 140);
+    return () => clearInterval(timer);
+  }, [reduceMotion]);
+
   const logoScale = useSharedValue(1);
-  const barX = useSharedValue(-BAR_FILL);
   const dot = useSharedValue(0);
 
   useEffect(() => {
@@ -101,20 +109,14 @@ const MeshLoading = ({
       ),
       -1
     );
-    barX.value = withRepeat(
-      withTiming(BAR_WIDTH, { duration: 1400, easing: Easing.bezier(0.65, 0, 0.35, 1) }),
-      -1
-    );
     dot.value = withRepeat(withTiming(1, { duration: 1000, easing: Easing.out(Easing.ease) }), -1);
     return () => {
       cancelAnimation(logoScale);
-      cancelAnimation(barX);
       cancelAnimation(dot);
     };
-  }, [reduceMotion, logoScale, barX, dot]);
+  }, [reduceMotion, logoScale, dot]);
 
   const logoStyle = useAnimatedStyle(() => ({ transform: [{ scale: logoScale.value }] }));
-  const barStyle = useAnimatedStyle(() => ({ transform: [{ translateX: barX.value }] }));
   const dotStyle = useAnimatedStyle(() => ({
     opacity: 0.6 * (1 - dot.value),
     transform: [{ scale: 1 + dot.value }],
@@ -146,25 +148,15 @@ const MeshLoading = ({
           </Animated.View>
         </View>
 
-        <Text className="mt-10 text-center text-xl font-bold leading-6 tracking-tight text-foreground">
+        <Text variant="h4" className="mt-10 text-center font-bold">
           {title}
         </Text>
-        <Text className="mt-1.5 max-w-[300px] text-center text-[15px] leading-5 text-muted-foreground">
+        <Text variant="muted" className="mt-1.5 max-w-[300px] text-center text-[15px] leading-5">
           {description}
         </Text>
 
-        {/* Indeterminate progress */}
-        <View
-          className="mt-8 h-1 overflow-hidden rounded-full bg-foreground/10"
-          style={{ width: BAR_WIDTH }}
-        >
-          <Animated.View
-            style={[
-              { width: BAR_FILL, height: '100%', borderRadius: 999, backgroundColor: colors.foreground },
-              reduceMotion ? undefined : barStyle,
-            ]}
-          />
-        </View>
+        {/* Fortschritt (Reusables `Progress`, läuft in Schleife bis die Verbindung steht) */}
+        <Progress value={progress} className="mt-8 h-1 w-40" />
       </Animated.View>
 
       {/* Real connection status */}

@@ -1,17 +1,17 @@
+import { RefreshCwIcon } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, Text, View } from 'react-native';
-import Animated, {
-  FadeIn,
-  FadeInUp,
-  FadeOut,
-  FadeOutUp,
-  useReducedMotion,
-} from 'react-native-reanimated';
+import { View } from 'react-native';
+import Animated, { FadeIn, FadeInUp, FadeOut, FadeOutUp, useReducedMotion } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { Spinner } from '@/components/app/spinner';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
+import { Text } from '@/components/ui/text';
 
 import { useMeshTranslation } from '../i18n';
 import { getMeshWindow } from '../platform/mesh.window';
-import { MeshIcon, useMeshColors } from './mesh.ui';
 
 interface IProps {
   visible: boolean;
@@ -39,15 +39,13 @@ const useOnline = () => {
 };
 
 /**
- * Dezente Pill oben, während die Mesh-Verbindung nach einem Abbruch wiederhergestellt wird.
- * Die App bleibt dabei vollständig bedienbar (kein Vollbild-Fehler). Offline wird sie nicht
- * gezeigt.
+ * Dezente Pill oben (Reusables `Badge` + `Button`), während die Mesh-Verbindung nach einem
+ * Abbruch wiederhergestellt wird. Die App bleibt bedienbar; offline wird sie nicht gezeigt.
  */
 export const MeshReconnectBanner = ({ visible, onRetry }: IProps) => {
   const { t } = useMeshTranslation();
   const reduceMotion = useReducedMotion();
   const insets = useSafeAreaInsets();
-  const colors = useMeshColors();
   const online = useOnline();
   const [show, setShow] = useState(false);
   const [showRetry, setShowRetry] = useState(false);
@@ -66,50 +64,27 @@ export const MeshReconnectBanner = ({ visible, onRetry }: IProps) => {
 
   const isShown = visible && show && online;
 
-  // Der Container bleibt gemountet, damit die Exit-Animation der Pill laufen kann.
+  // Der Container bleibt gemountet, damit die Exit-Animation laufen kann.
   return (
-    <View
-      pointerEvents="box-none"
-      className="absolute inset-x-0 top-0 z-[90] items-center px-4"
-      style={{ paddingTop: insets.top + 12 }}
-    >
+    <View pointerEvents="box-none" className="absolute inset-x-0 top-0 z-[90] items-center px-4" style={{ paddingTop: insets.top + 12 }}>
       {isShown && (
-      <Animated.View
-        accessibilityRole="alert"
-        accessibilityLiveRegion="polite"
-        entering={reduceMotion ? FadeIn : FadeInUp.springify().stiffness(420).damping(32)}
-        exiting={reduceMotion ? FadeOut : FadeOutUp}
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: 8,
-          borderRadius: 999,
-          backgroundColor: colors.foreground,
-          paddingVertical: 8,
-          paddingLeft: 16,
-          paddingRight: 8,
-          shadowColor: '#000',
-          shadowOpacity: 0.15,
-          shadowRadius: 12,
-          shadowOffset: { width: 0, height: 4 },
-          elevation: 6,
-        }}
-      >
-        <ActivityIndicator size="small" color={colors.background} />
-        <Text className="text-[13px] font-semibold text-background">{t('banner.reconnecting')}</Text>
-        {showRetry ? (
-          <Pressable
-            accessibilityRole="button"
-            onPress={onRetry}
-            className="ml-1 min-h-8 flex-row items-center gap-1 rounded-full bg-background/15 px-3 py-1 active:bg-background/25"
-          >
-            <MeshIcon name="refresh" size={14} color={colors.background} />
-            <Text className="text-[13px] font-semibold text-background">{t('banner.retry')}</Text>
-          </Pressable>
-        ) : (
-          <View className="pr-2" />
-        )}
-      </Animated.View>
+        <Animated.View
+          entering={reduceMotion ? FadeIn : FadeInUp.springify().stiffness(420).damping(32)}
+          exiting={reduceMotion ? FadeOut : FadeOutUp}
+        >
+          <Badge role="alert" className="flex-row items-center gap-2 rounded-full py-1.5 pl-4 pr-1.5 shadow-lg shadow-black/15">
+            <Spinner size={14} />
+            <Text className="text-[13px] font-semibold">{t('banner.reconnecting')}</Text>
+            {showRetry ? (
+              <Button size="sm" variant="secondary" onPress={onRetry} className="ml-1 h-8 rounded-full px-3">
+                <Icon as={RefreshCwIcon} size={14} />
+                <Text>{t('banner.retry')}</Text>
+              </Button>
+            ) : (
+              <View className="pr-2" />
+            )}
+          </Badge>
+        </Animated.View>
       )}
     </View>
   );

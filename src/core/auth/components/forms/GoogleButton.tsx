@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { ActivityIndicator, Text as RNText } from 'react-native';
 
+import { Spinner } from '@/components/app/spinner';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
-import { useThemeColors } from '@/core/theme/colors';
 
 import { GoogleAuthCancelledError, isGoogleAuthConfigured } from '../../google.auth';
 import { toErrorMessage, useAuthTranslation } from '../../i18n';
@@ -16,7 +15,6 @@ interface IProps {
 
 export const GoogleButton = ({ onSuccess, onError }: IProps) => {
   const { t, has } = useAuthTranslation();
-  const colors = useThemeColors();
   const { loginWithGoogle, isLoggingIn } = useAuth();
   const [pending, setPending] = useState(false);
   const busy = pending || isLoggingIn;
@@ -46,16 +44,10 @@ export const GoogleButton = ({ onSuccess, onError }: IProps) => {
       onPress={handlePress}
       disabled={busy}
       accessibilityState={{ busy: pending }}
-      className="h-12 w-full rounded-full"
+      className="h-12 w-full rounded-full sm:h-12"
     >
-      {pending ? (
-        <ActivityIndicator size="small" color={colors.foreground} />
-      ) : (
-        <RNText style={{ fontSize: 17, fontWeight: '800', color: '#4285F4' }}>G</RNText>
-      )}
-      <Text className="text-[15px] font-bold">
-        {pending ? t('form.googleSubmitting') : t('form.google')}
-      </Text>
+      {pending ? <Spinner /> : <Text className="text-lg font-extrabold text-[#4285F4]">G</Text>}
+      <Text className="font-bold">{pending ? t('form.googleSubmitting') : t('form.google')}</Text>
     </Button>
   );
 };

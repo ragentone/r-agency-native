@@ -1,8 +1,13 @@
-import { forwardRef, useState } from 'react';
-import { Pressable, Text, TextInput, type TextInputProps, View } from 'react-native';
+import { EyeIcon, EyeOffIcon, type LucideIcon } from 'lucide-react-native';
+import { forwardRef, useId, useState } from 'react';
+import { type TextInput, type TextInputProps, View } from 'react-native';
 
-import { useThemeColors } from '@/core/theme/colors';
-import { AppIcon, type AppIconName } from '@/core/ui/AppIcon';
+import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Text } from '@/components/ui/text';
+import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 
 import { useAuthTranslation } from '../../i18n';
@@ -10,72 +15,61 @@ import { useAuthTranslation } from '../../i18n';
 interface IProps extends Omit<TextInputProps, 'className'> {
   label: string;
   error?: string;
-  icon?: AppIconName;
+  icon?: LucideIcon;
   /** Passwortfeld mit Anzeigen/Ausblenden-Schalter. */
   password?: boolean;
+  /** Mehrzeilig (Reusables `Textarea`). */
+  textarea?: boolean;
   className?: string;
 }
 
-/** Eingabefeld mit Label, Icon und Fehlermeldung (Web: shadcn Field + Input). */
+/** Formularfeld aus Reusables: `Label` + `Input`/`Textarea` + Icon + Fehlermeldung. */
 export const FormField = forwardRef<TextInput, IProps>(
-  ({ label, error, icon, password, className, editable = true, ...inputProps }, ref) => {
-    const colors = useThemeColors();
+  ({ label, error, icon, password, textarea, className, editable = true, ...inputProps }, ref) => {
     const { t } = useAuthTranslation();
     const [visible, setVisible] = useState(false);
-    const [focused, setFocused] = useState(false);
+    const id = useId();
     const invalid = Boolean(error);
+    const Field = textarea ? Textarea : Input;
 
     return (
       <View className={cn('gap-2', className)}>
-        <Text className={cn('text-sm font-medium', invalid ? 'text-destructive' : 'text-foreground')}>
+        <Label nativeID={id} className={cn(invalid && 'text-destructive')}>
           {label}
-        </Text>
+        </Label>
         <View className="relative justify-center">
-          {icon && (
-            <View
-              pointerEvents="none"
-              className={cn('absolute left-3.5 z-10', inputProps.multiline && 'top-3.5')}
-            >
-              <AppIcon name={icon} size={16} color={colors.muted} />
+          {icon && !textarea && (
+            <View pointerEvents="none" className="absolute left-3.5 z-10">
+              <Icon as={icon} size={16} className="text-muted-foreground" />
             </View>
           )}
-          <TextInput
+          <Field
             ref={ref}
             {...inputProps}
-            accessibilityLabel={label}
+            aria-labelledby={id}
+            aria-invalid={invalid}
             accessibilityHint={error}
             editable={editable}
-            placeholderTextColor={colors.muted}
             secureTextEntry={password && !visible}
-            autoCapitalize="none"
-            autoCorrect={false}
-            onFocus={event => {
-              setFocused(true);
-              inputProps.onFocus?.(event);
-            }}
-            onBlur={event => {
-              setFocused(false);
-              inputProps.onBlur?.(event);
-            }}
+            autoCapitalize={inputProps.autoCapitalize ?? 'none'}
+            autoCorrect={inputProps.autoCorrect ?? false}
             className={cn(
-              'rounded-xl border bg-background text-base text-foreground',
-              inputProps.multiline ? 'min-h-[140px] py-3' : 'h-12',
-              icon ? 'pl-10' : 'pl-3.5',
-              password ? 'pr-12' : 'pr-3.5',
-              invalid ? 'border-destructive' : focused ? 'border-foreground/40' : 'border-input',
-              !editable && 'opacity-50'
+              textarea ? 'min-h-[140px] rounded-xl py-3' : 'h-12 rounded-xl sm:h-12',
+              icon && !textarea && 'pl-10',
+              password && 'pr-12',
+              invalid && 'border-destructive'
             )}
           />
           {password && (
-            <Pressable
-              accessibilityRole="button"
+            <Button
+              variant="ghost"
+              size="icon"
               accessibilityLabel={visible ? t('form.hidePassword') : t('form.showPassword')}
-              hitSlop={8}
               onPress={() => setVisible(prev => !prev)}
-              className="absolute right-1 h-10 w-10 items-center justify-center rounded-lg"
+              className="absolute right-1 rounded-lg"
             >
-              <AppIcon name={visible ? 'eyeOff' : 'eye'} size={18} color={colors.muted} />
-            </Pressable>
+              <Icon as={visible ? EyeOffIcon : EyeIcon} size={18} className="text-muted-foreground" />
+            </Button>
           )}
         </View>
         {invalid && <Text className="text-sm text-destructive">{error}</Text>}

@@ -1,13 +1,21 @@
 import Constants from 'expo-constants';
 import { reloadAppAsync } from 'expo';
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  RadioIcon,
+  RefreshCwIcon,
+  RotateCcwIcon,
+  Share2Icon,
+  TriangleAlertIcon,
+} from 'lucide-react-native';
 import { useEffect, useState } from 'react';
-import { Platform, Pressable, ScrollView, Share, Text, View } from 'react-native';
+import { Platform, ScrollView, Share, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
-  FadeIn,
   FadeInDown,
-  FadeOut,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -16,22 +24,24 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { Spinner } from '@/components/app/spinner';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Text as UIText } from '@/components/ui/text';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Icon } from '@/components/ui/icon';
+import { Separator } from '@/components/ui/separator';
+import { Text } from '@/components/ui/text';
+import { useThemeColors } from '@/core/theme/colors';
 import { cn } from '@/lib/utils';
 
 import { MESH_SERVER_ENDPOINT } from '../config';
 import { useMeshTranslation } from '../i18n';
-import { MeshIcon, MONO_FONT, useMeshColors } from './mesh.ui';
+import { MONO_FONT } from './mesh.ui';
 import { useOptionalMeshState } from './use.mesh';
 
-export type MeshErrorStatus =
-  | 'idle'
-  | 'connecting'
-  | 'connected'
-  | 'reconnecting'
-  | 'disconnected'
-  | 'error';
+export type MeshErrorStatus = 'idle' | 'connecting' | 'connected' | 'reconnecting' | 'disconnected' | 'error';
 
 export interface MeshErrorProps {
   status?: MeshErrorStatus;
@@ -47,7 +57,7 @@ export interface MeshErrorProps {
 
 const AMBER = '#f59e0b';
 
-/** Weicher, pulsierender Farbschein hinter der Karte. */
+/** Weicher, pulsierender Farbschein hinter der Karte (reine Animation). */
 const AmbientGlow = ({ color }: { color: string }) => {
   const reduceMotion = useReducedMotion();
   const progress = useSharedValue(0);
@@ -71,31 +81,17 @@ const AmbientGlow = ({ color }: { color: string }) => {
 
   return (
     <View pointerEvents="none" className="absolute inset-0 items-center justify-center">
-      <Animated.View
-        style={[{ width: 384, height: 384, borderRadius: 192, backgroundColor: color }, style]}
-      />
+      <Animated.View style={[{ width: 384, height: 384, borderRadius: 192, backgroundColor: color }, style]} />
     </View>
   );
 };
 
-const DiagnosticRow = ({
-  label,
-  value,
-  valueClassName,
-}: {
-  label: string;
-  value: string | number;
-  valueClassName?: string;
-}) => (
+const DiagnosticRow = ({ label, value, valueClassName }: { label: string; value: string | number; valueClassName?: string }) => (
   <View className="flex-row justify-between gap-2">
-    <Text className="text-xs text-foreground/70" style={{ fontFamily: MONO_FONT }}>
+    <Text variant="muted" className="text-xs" style={{ fontFamily: MONO_FONT }}>
       {label}:
     </Text>
-    <Text
-      numberOfLines={1}
-      className={cn('flex-1 text-right text-xs font-semibold text-foreground', valueClassName)}
-      style={{ fontFamily: MONO_FONT }}
-    >
+    <Text numberOfLines={1} className={cn('flex-1 text-right text-xs font-semibold', valueClassName)} style={{ fontFamily: MONO_FONT }}>
       {value}
     </Text>
   </View>
@@ -113,7 +109,7 @@ const MeshError = ({
   className,
 }: MeshErrorProps) => {
   const { t } = useMeshTranslation();
-  const colors = useMeshColors();
+  const colors = useThemeColors();
   const contextState = useOptionalMeshState();
 
   const status = propStatus ?? contextState?.status ?? 'error';
@@ -126,7 +122,6 @@ const MeshError = ({
   const [isManualRetrying, setIsManualRetrying] = useState(false);
 
   const endpoint = propEndpoint || MESH_SERVER_ENDPOINT || 'mesh-server';
-
   const isReconnecting = status === 'reconnecting' || isManualRetrying;
   const isDisconnected = status === 'disconnected';
 
@@ -139,20 +134,16 @@ const MeshError = ({
           ? t('error.messages.disconnected')
           : t('error.messages.failed');
 
-  const defaultTitle = isReconnecting
-    ? t('error.title.reconnecting')
-    : isDisconnected
-      ? t('error.title.disconnected')
-      : t('error.title.failed');
-
-  const defaultDescription = isReconnecting
-    ? t('error.description.reconnecting')
-    : isDisconnected
-      ? t('error.description.disconnected')
-      : t('error.description.failed');
-
-  const title = propTitle || defaultTitle;
-  const description = propDescription || defaultDescription;
+  const title =
+    propTitle ||
+    (isReconnecting ? t('error.title.reconnecting') : isDisconnected ? t('error.title.disconnected') : t('error.title.failed'));
+  const description =
+    propDescription ||
+    (isReconnecting
+      ? t('error.description.reconnecting')
+      : isDisconnected
+        ? t('error.description.disconnected')
+        : t('error.description.failed'));
 
   const handleRetry = async () => {
     if (!onRetry) return;
@@ -165,12 +156,10 @@ const MeshError = ({
   };
 
   const handleRestart = () => {
-    reloadAppAsync('mesh error screen').catch(reloadError =>
-      console.warn('[mesh] reload', reloadError)
-    );
+    reloadAppAsync('mesh error screen').catch(reloadError => console.warn('[mesh] reload', reloadError));
   };
 
-  /** Im Browser: in die Zwischenablage. Nativ: über das System-Teilen-Menü. */
+  /** Diagnose über das System-Teilen-Menü weitergeben. */
   const handleShareDetails = async () => {
     const details = [
       `[Mesh Connection Diagnostic]`,
@@ -182,7 +171,6 @@ const MeshError = ({
       `App: ${Constants.expoConfig?.name ?? 'r-agency-native'} ${Constants.expoConfig?.version ?? ''}`,
       `Platform: ${Platform.OS} ${String(Platform.Version)}`,
     ].join('\n');
-
     try {
       const result = await Share.share({ message: details });
       if (result.action === Share.sharedAction) {
@@ -198,130 +186,79 @@ const MeshError = ({
     <View className={cn('flex-1 bg-background', className)}>
       <AmbientGlow color={isDisconnected ? AMBER : colors.destructive} />
 
-      <ScrollView
-        contentContainerClassName="flex-grow items-center justify-center p-4"
-        contentInsetAdjustmentBehavior="automatic"
-      >
-        <Animated.View
-          entering={FadeInDown.duration(350).easing(Easing.out(Easing.ease))}
-          style={{ width: '100%', maxWidth: 512 }}
-        >
-          <View className="w-full gap-4 rounded-2xl bg-card/90 p-6">
-            {/* Header */}
-            <View className="gap-1.5 pb-2">
-              <Text className="text-center text-xl font-bold tracking-tight text-foreground">
-                {title}
-              </Text>
-              <Text className="text-center text-sm leading-relaxed text-muted-foreground">
-                {description}
-              </Text>
-            </View>
+      <ScrollView contentContainerClassName="flex-grow items-center justify-center p-4" contentInsetAdjustmentBehavior="automatic">
+        <Animated.View entering={FadeInDown.duration(350).easing(Easing.out(Easing.ease))} style={{ width: '100%', maxWidth: 512 }}>
+          <Card className="w-full border-0 bg-card/90 shadow-none">
+            <CardHeader className="items-center">
+              <CardTitle className="text-center text-xl font-bold">{title}</CardTitle>
+              <CardDescription className="text-center">{description}</CardDescription>
+            </CardHeader>
 
-            {/* Error Message Box */}
-            {!!errorMessage && (
-              <View className="flex-row items-start gap-3 rounded-xl border border-destructive/20 bg-destructive/5 p-3.5 dark:border-destructive/30 dark:bg-destructive/10">
-                <View className="mt-0.5">
-                  <MeshIcon name="alert" size={16} color={colors.destructive} />
-                </View>
-                <Text className="flex-1 text-sm font-medium leading-snug text-destructive">
-                  {errorMessage}
-                </Text>
-              </View>
-            )}
+            <CardContent className="gap-4">
+              {!!errorMessage && (
+                <Alert icon={TriangleAlertIcon} variant="destructive">
+                  <AlertDescription className="font-medium">{errorMessage}</AlertDescription>
+                </Alert>
+              )}
 
-            {/* Diagnostic Details */}
-            {showDetails && (
-              <View className="overflow-hidden rounded-xl border border-border/50 bg-muted/40">
-                <Pressable
-                  accessibilityRole="button"
-                  accessibilityState={{ expanded: isDetailsOpen }}
-                  onPress={() => setIsDetailsOpen(prev => !prev)}
-                  className="flex-row items-center justify-between px-4 py-2.5 active:bg-muted/70"
-                >
-                  <View className="flex-row items-center gap-1.5">
-                    <MeshIcon name="radio" size={14} color={colors.muted} />
-                    <Text className="text-xs font-semibold text-muted-foreground">
-                      {t('error.diagnostics.title')}
-                    </Text>
-                  </View>
-                  <MeshIcon
-                    name={isDetailsOpen ? 'chevronUp' : 'chevronDown'}
-                    size={16}
-                    color={colors.muted}
-                  />
-                </Pressable>
-
-                {isDetailsOpen && (
-                  <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(200)}>
-                    <View className="gap-2 border-t border-border/50 p-3">
-                      <DiagnosticRow label={t('error.diagnostics.endpoint')} value={endpoint} />
-                      <DiagnosticRow
-                        label={t('error.diagnostics.status')}
-                        value={status.toUpperCase()}
-                      />
-                      <DiagnosticRow
-                        label={t('error.diagnostics.retries')}
-                        value={retryCount}
-                        valueClassName="text-primary"
-                      />
-                      <View className="items-end pt-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onPress={handleShareDetails}
-                          className="h-7 flex-row gap-1.5"
-                        >
-                          <MeshIcon
-                            name={isShared ? 'check' : 'share'}
+              {showDetails && (
+                <Collapsible open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
+                  <Card className="gap-0 overflow-hidden rounded-xl bg-muted/40 py-0 shadow-none">
+                    <CollapsibleTrigger asChild>
+                      <Button variant="ghost" className="h-auto justify-between rounded-none px-4 py-2.5">
+                        <View className="flex-row items-center gap-1.5">
+                          <Icon as={RadioIcon} size={14} className="text-muted-foreground" />
+                          <Text className="text-xs font-semibold text-muted-foreground">{t('error.diagnostics.title')}</Text>
+                        </View>
+                        <Icon as={isDetailsOpen ? ChevronUpIcon : ChevronDownIcon} size={16} className="text-muted-foreground" />
+                      </Button>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <Separator />
+                      <View className="gap-2 p-3">
+                        <DiagnosticRow label={t('error.diagnostics.endpoint')} value={endpoint} />
+                        <DiagnosticRow label={t('error.diagnostics.status')} value={status.toUpperCase()} />
+                        <DiagnosticRow label={t('error.diagnostics.retries')} value={retryCount} valueClassName="text-primary" />
+                        <Button variant="ghost" size="sm" onPress={handleShareDetails} className="h-7 self-end">
+                          <Icon
+                            as={isShared ? CheckIcon : Share2Icon}
                             size={14}
-                            color={isShared ? colors.success : colors.muted}
+                            className={isShared ? 'text-green-600 dark:text-green-500' : 'text-muted-foreground'}
                           />
-                          <UIText className="text-xs text-muted-foreground">
+                          <Text className="text-xs text-muted-foreground">
                             {isShared ? t('error.diagnostics.copied') : t('error.diagnostics.share')}
-                          </UIText>
+                          </Text>
                         </Button>
                       </View>
-                    </View>
-                  </Animated.View>
-                )}
-              </View>
-            )}
+                    </CollapsibleContent>
+                  </Card>
+                </Collapsible>
+              )}
 
-            {/* Retry count badge */}
-            <View className="items-center pt-1">
-              <View className="flex-row items-center gap-1.5 rounded-full border border-border/50 bg-background/50 px-3 py-1">
-                <MeshIcon name="rotate" size={12} color={colors.foreground} spin={isReconnecting} />
-                <Text className="text-xs text-foreground" style={{ fontFamily: MONO_FONT }}>
+              <Badge variant="outline" className="flex-row items-center gap-1.5 self-center rounded-full px-3 py-1">
+                {isReconnecting ? <Spinner size={12} /> : <Icon as={RotateCcwIcon} size={12} />}
+                <Text className="text-xs" style={{ fontFamily: MONO_FONT }}>
                   {t('error.diagnostics.retryCount')}
                 </Text>
                 <Text className="text-xs font-bold text-primary" style={{ fontFamily: MONO_FONT }}>
                   {retryCount}
                 </Text>
-              </View>
-            </View>
+              </Badge>
+            </CardContent>
 
-            {/* Actions */}
-            <View className="gap-2.5 pt-2">
+            <CardFooter className="flex-col gap-2.5">
               {onRetry && (
                 <Button onPress={handleRetry} disabled={isReconnecting} className="w-full">
-                  <MeshIcon
-                    name="refresh"
-                    size={16}
-                    color={colors.primaryForeground}
-                    spin={isReconnecting}
-                  />
-                  <UIText>
-                    {isReconnecting ? t('error.actions.reconnecting') : t('error.actions.retry')}
-                  </UIText>
+                  {isReconnecting ? <Spinner /> : <Icon as={RefreshCwIcon} size={16} />}
+                  <Text>{isReconnecting ? t('error.actions.reconnecting') : t('error.actions.retry')}</Text>
                 </Button>
               )}
-
-              <Button variant="outline" onPress={handleRestart} className="w-full border-border/50">
-                <MeshIcon name="rotate" size={16} color={colors.foreground} />
-                <UIText>{t('error.actions.restart')}</UIText>
+              <Button variant="outline" onPress={handleRestart} className="w-full">
+                <Icon as={RotateCcwIcon} size={16} />
+                <Text>{t('error.actions.restart')}</Text>
               </Button>
-            </View>
-          </View>
+            </CardFooter>
+          </Card>
         </Animated.View>
       </ScrollView>
     </View>
