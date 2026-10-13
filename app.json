@@ -5,7 +5,10 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "ragencynative",
+    "scheme": [
+      "ragencynative",
+      "r-agency"
+    ],
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
@@ -36,7 +39,8 @@
         }
       ],
       "./plugins/with-release-signing",
-      "./plugins/with-abi-splits"
+      "./plugins/with-abi-splits",
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true,

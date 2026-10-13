@@ -1,0 +1,285 @@
+{
+  "form": {
+    "title": "Sign In",
+    "description": "Enter your credentials to access your account",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "submit": "Sign In",
+    "submitting": "Signing in...",
+    "google": "Sign in with Google",
+    "googleSubmitting": "Signing in with Google...",
+    "or": "Or"
+  },
+  "createForm": {
+    "title": "Create User",
+    "description": "Enter your details to create a new user account",
+    "alias": "Username / Alias",
+    "aliasPlaceholder": "johndoe",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Create a password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "submit": "Create User",
+    "submitting": "Creating user..."
+  },
+  "resetPasswordForm": {
+    "title": "Reset Password",
+    "description": "Enter your email address to receive a password reset link",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "submit": "Reset Password",
+    "submitting": "Sending..."
+  },
+  "createPasswordForm": {
+    "title": "Set Password",
+    "description": "Enter your new password",
+    "password": "New Password",
+    "passwordPlaceholder": "Enter new password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Repeat password",
+    "submit": "Save Password",
+    "submitting": "Saving..."
+  },
+  "changePasswordForm": {
+    "title": "Change Password",
+    "description": "Enter your current password and your new password",
+    "currentPassword": "Current Password",
+    "currentPasswordPlaceholder": "Enter your current password",
+    "newPassword": "New Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmPassword": "Confirm New Password",
+    "confirmPasswordPlaceholder": "Repeat your new password",
+    "submit": "Change Password",
+    "submitting": "Changing password...",
+    "success": "Password changed successfully."
+  },
+  "deleteUserForm": {
+    "title": "Delete Account",
+    "description": "Enter your password to permanently delete your account. This action cannot be undone.",
+    "password": "Your Password",
+    "passwordPlaceholder": "Enter your current password",
+    "submit": "Permanently Delete Account",
+    "submitting": "Deleting..."
+  },
+  "deleteDialog": {
+    "title": "Delete Account",
+    "description": "Are you sure you want to delete your account? This action cannot be undone and will permanently delete all your data.",
+    "password": "Password",
+    "confirm": "Delete",
+    "cancel": "Abort"
+  },
+  "logout": {
+    "trigger": "Log Out",
+    "title": "Log Out",
+    "description": "Are you sure you want to log out?",
+    "confirm": "Log Out",
+    "cancel": "Cancel",
+    "loggingOut": "Logging out...",
+    "activeAccount": "Current Account",
+    "goodbye": "See you soon!",
+    "goodbyeName": "See you soon, {{name}}!",
+    "overlayHint": "Just a moment …",
+    "goodbyeHint": "You have been signed out."
+  },
+  "validation": {
+    "aliasRequired": "Alias is required",
+    "aliasMin": "Alias must be at least {{min}} characters",
+    "aliasExists": "Alias already exists",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email address",
+    "emailExists": "Email already exists",
+    "currentPasswordRequired": "Current password is required",
+    "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least {{min}} characters",
+    "passwordMatch": "Passwords must match",
+    "confirmPasswordRequired": "Confirm password is required"
+  },
+  "errors": {
+    "loginFailed": "Login failed. Please try again.",
+    "googleAuthFailed": "Google sign-in failed. Please try again.",
+    "createFailed": "User creation failed. Please try again.",
+    "resetFailed": "Password reset failed. Please try again.",
+    "passwordCreateFailed": "Password creation failed. Please try again.",
+    "passwordChangeFailed": "Password change failed. Please check your inputs.",
+    "deleteFailed": "Account deletion failed. Please try again.",
+    "not_authorized": "Not authorized. User ID is missing or invalid."
+  },
+  "admin.user_updated": "User was updated",
+  "invalid_auth_request": "Invalid authentication request",
+  "invalid_user_create_schema": "Invalid user create data",
+  "not_authorized": "Not authorized. Access denied",
+  "token_expired": "Token has expired",
+  "token_not_exists": "Token does not exist",
+  "user_account_blocked": "This user account is blocked",
+  "user_account_deleted": "This account has been permanently deleted. To regain access, you must create a new account.",
+  "user_account_not_active": "This user account is not active",
+  "user_account_updated_successfully": "Account was updated",
+  "user_alias_in_use": "This alias is already in use",
+  "user_already_exists": "User already exists",
+  "user_avatar_not_exists": "User avatar does not exist",
+  "user_avatar_uploaded_successfully": "User avatar uploaded successfully",
+  "user_blocked": "This user account is blocked",
+  "user_confirmed_successfully": "Email confirmed! You can now sign in to your account.",
+  "user_created_successfully": "Account created successfully! Please check your email to verify your address and activate your account.",
+  "user_delete_request_success": "Account deletion started. Please check your inbox to verify this action.",
+  "user_device_id_not_provided": "Device ID was not provided",
+  "user_expired_password_recovery_token": "This password reset link has expired. Please request a new one.",
+  "user_invalid_confirm_token": "Invalid confirmation token",
+  "user_invalid_password": "We couldn't verify your password. Please try again, or use 'Forgot Password' if you need to reset it.",
+  "user_invalid_password_recovery_token": "Invalid password recovery token. Please request a new link.",
+  "user_invalid_role_for_resource": "You don’t have the necessary permissions to perform this action. Your current role does not allow access to this resource.",
+  "user_logged_in_successfully": "User Logged In Successfully",
+  "user_logged_out_successfully": "Successfully logged out. Come back soon!",
+  "user_not_active": "This user account is not active",
+  "user_not_authorized": "Not authorized. Please log in.",
+  "user_not_confirmed": "Your account has not been confirmed yet. Please check your email inbox (including spam folder) and click the confirmation link we sent. If you didn't receive the email, request a new confirmation link.",
+  "user_not_exists": "User does not exist",
+  "user_notify_not_exists": "Notification does not exist",
+  "user_password_changed_successfully": "Password changed successfully. All other active sessions have been logged out for security.",
+  "user_password_created": "Your password has been successfully created. If you did not create this password, please contact our support team immediately.",
+  "user_password_reset_email_sent_successfully": "We've sent password reset instructions to your inbox. Please check your spam folder if you don't see it within a few minutes.",
+  "user_password_used_before": "Password already used previously. Choose a new password that you haven't used with this account.",
+  "user_recovery_not_completed": "Account recovery was not completed",
+  "user_relation_invalid_request_schema": "Invalid relation request schema",
+  "user_relation_not_exists": "User relation does not exist",
+  "user_relation_self_request_not_allowed": "You cannot send a contact request to yourself",
+  "user_repository_not_exists": "User repository not found",
+  "user_teaser_not_exists": "Teaser image does not exist",
+  "user_teaser_uploaded_successfully": "Teaser uploaded successfully",
+  "user_update_role_not_allowed": "Changing user role is not allowed",
+  "page": {
+    "loginHeadline": "Welcome back",
+    "createHeadline": "Create your account",
+    "createTab": "Sign up",
+    "forgotPassword": "Forgot password?",
+    "backToLogin": "Back to sign in",
+    "switchLabel": "Sign in or sign up",
+    "signedIn": {
+      "text": "You are already signed in.",
+      "home": "Go to home",
+      "account": "My account"
+    }
+  },
+  "greeting": {
+    "label": "Greeting",
+    "profile": "Go to profile",
+    "lastLogin": "last active {{time}}",
+    "platform": {
+      "label": "Platform: {{platform}}",
+      "web": "Web",
+      "android": "Android app",
+      "ios": "iOS app",
+      "macos": "macOS app"
+    },
+    "slots": {
+      "night": [
+        "Still up",
+        "Good night",
+        "Hey night owl"
+      ],
+      "morning": [
+        "Good morning",
+        "Morning",
+        "Rise and shine"
+      ],
+      "noon": [
+        "Hello",
+        "Hi there",
+        "Enjoy your lunch"
+      ],
+      "afternoon": [
+        "Good afternoon",
+        "Hello",
+        "Hey there"
+      ],
+      "evening": [
+        "Good evening",
+        "Evening",
+        "Hey"
+      ],
+      "late": [
+        "Still around",
+        "Late hello",
+        "Hi"
+      ]
+    },
+    "subline": {
+      "night": "The world is asleep – you are not. See what’s new.",
+      "morning": "A fresh start. See what happened overnight.",
+      "noon": "Time for a short break and the latest posts.",
+      "afternoon": "Good to see you. Here’s what’s happening.",
+      "evening": "Sit back and catch up on what you missed.",
+      "late": "One last look before the day ends."
+    },
+    "guest": {
+      "title": "Welcome",
+      "text": "Sign in to share posts, follow people and join the conversation.",
+      "cta": "Sign in",
+      "fallbackTitle": "Good to see you"
+    },
+    "week": "Week {{week}}",
+    "dayProgress": "{{percent}}% of the day has passed",
+    "holidayIn_one": "{{name}} in {{count}} day",
+    "holidayIn_other": "{{name}} in {{count}} days",
+    "holidayToday": "Today: {{name}}",
+    "holidayTomorrow": "Tomorrow: {{name}}",
+    "holidays": {
+      "newYear": "New Year’s Day",
+      "goodFriday": "Good Friday",
+      "easterMonday": "Easter Monday",
+      "labourDay": "Labour Day",
+      "ascension": "Ascension Day",
+      "whitMonday": "Whit Monday",
+      "germanUnity": "German Unity Day",
+      "christmas": "Christmas Day",
+      "boxingDay": "Boxing Day"
+    }
+  },
+  "confirmPage": {
+    "verifyingTitle": "Confirming your e-mail …",
+    "verifyingText": "One moment, we are checking your confirmation link.",
+    "successTitle": "E-mail confirmed",
+    "errorTitle": "Confirmation failed",
+    "failed": "The confirmation link is invalid or has already been used.",
+    "missing": "The link is missing the confirmation code. Please open it directly from the e-mail.",
+    "toLogin": "Sign in now",
+    "toHome": "Go to home"
+  },
+  "user_relation_not_allowed": "This action is not allowed for this friend request.",
+  "roles": {
+    "groups": {
+      "system": "System"
+    },
+    "items": {
+      "default": {
+        "label": "User",
+        "description": "Base role of every account"
+      },
+      "admin": {
+        "label": "Administrator",
+        "description": "Full access incl. admin area"
+      },
+      "dev": {
+        "label": "Developer",
+        "description": "Dev area, todos and tickets"
+      },
+      "google": {
+        "label": "Google account",
+        "description": "Set automatically on Google sign-in"
+      }
+    }
+  },
+  "native": {
+    "googleNotConfigured": "Google sign-in is not set up in this app yet.",
+    "googleCancelled": "Google sign-in was cancelled.",
+    "createSuccess": "Account created! Please confirm your e-mail address using the link we sent you.",
+    "resetSuccess": "We sent you an e-mail with a link to reset your password.",
+    "loading": "Checking sign-in status …"
+  }
+}

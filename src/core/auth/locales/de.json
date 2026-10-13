@@ -1,0 +1,285 @@
+{
+  "form": {
+    "title": "Anmelden",
+    "description": "Geben Sie Ihre Anmeldedaten ein, um auf Ihr Konto zuzugreifen",
+    "email": "E-Mail",
+    "emailPlaceholder": "name@beispiel.de",
+    "password": "Passwort",
+    "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort ausblenden",
+    "submit": "Anmelden",
+    "submitting": "Wird angemeldet...",
+    "google": "Mit Google anmelden",
+    "googleSubmitting": "Wird über Google angemeldet...",
+    "or": "Oder"
+  },
+  "createForm": {
+    "title": "Benutzer erstellen",
+    "description": "Geben Sie Ihre Daten ein, um ein neues Benutzerkonto zu erstellen",
+    "alias": "Benutzername / Alias",
+    "aliasPlaceholder": "maxmustermann",
+    "email": "E-Mail",
+    "emailPlaceholder": "name@beispiel.de",
+    "password": "Passwort",
+    "passwordPlaceholder": "Passwort erstellen",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort ausblenden",
+    "submit": "Benutzer erstellen",
+    "submitting": "Benutzer wird erstellt..."
+  },
+  "resetPasswordForm": {
+    "title": "Passwort zurücksetzen",
+    "description": "Geben Sie Ihre E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten",
+    "email": "E-Mail",
+    "emailPlaceholder": "name@beispiel.de",
+    "submit": "Passwort zurücksetzen",
+    "submitting": "Wird gesendet..."
+  },
+  "createPasswordForm": {
+    "title": "Passwort festlegen",
+    "description": "Geben Sie Ihr neues Passwort ein",
+    "password": "Neues Passwort",
+    "passwordPlaceholder": "Neues Passwort eingeben",
+    "confirmPassword": "Passwort bestätigen",
+    "confirmPasswordPlaceholder": "Passwort wiederholen",
+    "submit": "Passwort speichern",
+    "submitting": "Wird gespeichert..."
+  },
+  "changePasswordForm": {
+    "title": "Passwort ändern",
+    "description": "Geben Sie Ihr aktuelles Passwort und das neue Passwort ein",
+    "currentPassword": "Aktuelles Passwort",
+    "currentPasswordPlaceholder": "Geben Sie Ihr aktuelles Passwort ein",
+    "newPassword": "Neues Passwort",
+    "newPasswordPlaceholder": "Geben Sie Ihr neues Passwort ein",
+    "confirmPassword": "Neues Passwort bestätigen",
+    "confirmPasswordPlaceholder": "Wiederholen Sie das neue Passwort",
+    "submit": "Passwort ändern",
+    "submitting": "Wird geändert...",
+    "success": "Passwort erfolgreich geändert."
+  },
+  "deleteUserForm": {
+    "title": "Konto löschen",
+    "description": "Geben Sie Ihr Passwort ein, um Ihr Konto dauerhaft zu löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "password": "Ihr Passwort",
+    "passwordPlaceholder": "Geben Sie Ihr aktuelles Passwort ein",
+    "submit": "Konto endgültig löschen",
+    "submitting": "Wird gelöscht..."
+  },
+  "deleteDialog": {
+    "title": "Konto löschen",
+    "description": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden und alle Ihre Daten werden unwiderruflich gelöscht.",
+    "password": "Passwort",
+    "confirm": "Löschen",
+    "cancel": "Abbrechen"
+  },
+  "logout": {
+    "trigger": "Abmelden",
+    "title": "Abmelden",
+    "description": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+    "confirm": "Abmelden",
+    "cancel": "Abbrechen",
+    "loggingOut": "Wird abgemeldet...",
+    "activeAccount": "Aktuelles Konto",
+    "goodbye": "Bis bald!",
+    "goodbyeName": "Bis bald, {{name}}!",
+    "overlayHint": "Einen Moment bitte …",
+    "goodbyeHint": "Du wurdest abgemeldet."
+  },
+  "validation": {
+    "aliasRequired": "Alias ist erforderlich",
+    "aliasMin": "Alias muss mindestens {{min}} Zeichen lang sein",
+    "aliasExists": "Alias existiert bereits",
+    "emailRequired": "E-Mail ist erforderlich",
+    "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "emailExists": "E-Mail existiert bereits",
+    "currentPasswordRequired": "Aktuelles Passwort ist erforderlich",
+    "passwordRequired": "Passwort ist erforderlich",
+    "passwordMin": "Passwort muss mindestens {{min}} Zeichen lang sein",
+    "passwordMatch": "Passwörter müssen übereinstimmen",
+    "confirmPasswordRequired": "Passwortbestätigung ist erforderlich"
+  },
+  "errors": {
+    "loginFailed": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "googleAuthFailed": "Google-Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "createFailed": "Benutzererstellung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "resetFailed": "Passwort-Zurücksetzen fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "passwordCreateFailed": "Passwort-Erstellung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "passwordChangeFailed": "Passwort-Änderung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.",
+    "deleteFailed": "Kontolöschung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "not_authorized": "Nicht autorisiert. Benutzer-ID fehlt oder ungültig."
+  },
+  "admin.user_updated": "Benutzer wurde aktualisiert",
+  "invalid_auth_request": "Ungültige Authentifizierungsanfrage",
+  "invalid_user_create_schema": "Ungültige Daten für die Benutzererstellung",
+  "not_authorized": "Nicht autorisiert. Zugriff verweigert",
+  "token_expired": "Das Token ist abgelaufen",
+  "token_not_exists": "Token existiert nicht",
+  "user_account_blocked": "Dieses Benutzerkonto ist gesperrt",
+  "user_account_deleted": "Dieses Konto wurde endgültig gelöscht. Um wieder Zugriff zu erhalten, müssen Sie ein neues Konto erstellen.",
+  "user_account_not_active": "Dieses Benutzerkonto ist nicht aktiv",
+  "user_account_updated_successfully": "Konto wurde aktualisiert",
+  "user_alias_in_use": "Dieser Alias wird bereits verwendet",
+  "user_already_exists": "Benutzer existiert bereits",
+  "user_avatar_not_exists": "Benutzeravatar existiert nicht",
+  "user_avatar_uploaded_successfully": "Benutzeravatar erfolgreich hochgeladen",
+  "user_blocked": "Dieses Benutzerkonto ist gesperrt",
+  "user_confirmed_successfully": "E-Mail bestätigt! Sie können sich jetzt in Ihr Konto anmelden.",
+  "user_created_successfully": "Konto erfolgreich erstellt! Bitte überprüfen Sie Ihre E-Mail, um Ihre Adresse zu bestätigen und Ihr Konto zu aktivieren.",
+  "user_delete_request_success": "Kontolöschung gestartet. Bitte überprüfen Sie Ihr Postfach, um diese Aktion zu bestätigen.",
+  "user_device_id_not_provided": "Geräte-ID wurde nicht übermittelt",
+  "user_expired_password_recovery_token": "Dieser Link zum Zurücksetzen des Passworts ist abgelaufen. Bitte fordern Sie einen neuen an.",
+  "user_invalid_confirm_token": "Ungültiges Bestätigungstoken",
+  "user_invalid_password": "Wir konnten Ihr Passwort nicht überprüfen. Bitte versuchen Sie es erneut oder verwenden Sie 'Passwort vergessen', wenn Sie es zurücksetzen möchten.",
+  "user_invalid_password_recovery_token": "Ungültiges Token zur Passwortwiederherstellung. Bitte fordern Sie einen neuen Link an.",
+  "user_invalid_role_for_resource": "Sie haben nicht die erforderlichen Berechtigungen, um diese Aktion durchzuführen. Ihre aktuelle Rolle erlaubt keinen Zugriff auf diese Ressource.",
+  "user_logged_in_successfully": "Benutzer erfolgreich angemeldet",
+  "user_logged_out_successfully": "Erfolgreich abgemeldet. Kommen Sie bald wieder!",
+  "user_not_active": "Dieses Benutzerkonto ist nicht aktiv",
+  "user_not_authorized": "Nicht autorisiert. Bitte melden Sie sich an.",
+  "user_not_confirmed": "Ihr Konto wurde noch nicht bestätigt. Bitte überprüfen Sie Ihr E-Mail-Postfach (einschließlich Spam-Ordner) und klicken Sie auf den Bestätigungslink, den wir gesendet haben. Wenn Sie die E-Mail nicht erhalten haben, fordern Sie einen neuen Bestätigungslink an.",
+  "user_not_exists": "Benutzer existiert nicht",
+  "user_notify_not_exists": "Benachrichtigung existiert nicht",
+  "user_password_changed_successfully": "Passwort erfolgreich geändert. Alle anderen aktiven Sitzungen wurden aus Sicherheitsgründen abgemeldet.",
+  "user_password_created": "Ihr Passwort wurde erfolgreich erstellt. Wenn Sie dieses Passwort nicht erstellt haben, wenden Sie sich bitte sofort an unser Support-Team.",
+  "user_password_reset_email_sent_successfully": "Wir haben Ihnen Anweisungen zum Zurücksetzen Ihres Passworts an Ihr Postfach gesendet. Bitte überprüfen Sie Ihren Spam-Ordner, wenn die E-Mail nicht innerhalb weniger Minuten ankommt.",
+  "user_password_used_before": "Passwort wurde bereits zuvor verwendet. Wählen Sie ein neues Passwort, das Sie noch nicht mit diesem Konto verwendet haben.",
+  "user_recovery_not_completed": "Die Kontowiederherstellung wurde nicht abgeschlossen",
+  "user_relation_invalid_request_schema": "Ungültiges Schema für Beziehungsanfrage",
+  "user_relation_not_exists": "Benutzerbeziehung existiert nicht",
+  "user_relation_self_request_not_allowed": "Sie können sich selbst keine Kontaktanfrage senden",
+  "user_repository_not_exists": "Benutzer-Repository nicht gefunden",
+  "user_teaser_not_exists": "Titelbild existiert nicht",
+  "user_teaser_uploaded_successfully": "Titelbild erfolgreich hochgeladen",
+  "user_update_role_not_allowed": "Änderung der Benutzerrolle nicht gestattet",
+  "page": {
+    "loginHeadline": "Willkommen zurück",
+    "createHeadline": "Konto erstellen",
+    "createTab": "Registrieren",
+    "forgotPassword": "Passwort vergessen?",
+    "backToLogin": "Zurück zur Anmeldung",
+    "switchLabel": "Anmelden oder registrieren",
+    "signedIn": {
+      "text": "Du bist bereits angemeldet.",
+      "home": "Zur Startseite",
+      "account": "Mein Konto"
+    }
+  },
+  "greeting": {
+    "label": "Begrüßung",
+    "profile": "Zum Profil",
+    "lastLogin": "zuletzt aktiv {{time}}",
+    "platform": {
+      "label": "Plattform: {{platform}}",
+      "web": "Web",
+      "android": "Android-App",
+      "ios": "iOS-App",
+      "macos": "macOS-App"
+    },
+    "slots": {
+      "night": [
+        "Noch wach",
+        "Gute Nacht",
+        "Hallo Nachteule"
+      ],
+      "morning": [
+        "Guten Morgen",
+        "Moin",
+        "Schönen Morgen"
+      ],
+      "noon": [
+        "Mahlzeit",
+        "Hallo",
+        "Schöne Mittagspause"
+      ],
+      "afternoon": [
+        "Guten Tag",
+        "Hallo",
+        "Schönen Nachmittag"
+      ],
+      "evening": [
+        "Guten Abend",
+        "N’Abend",
+        "Schönen Abend"
+      ],
+      "late": [
+        "Noch unterwegs",
+        "Späte Grüße",
+        "Hallo"
+      ]
+    },
+    "subline": {
+      "night": "Die Welt schläft – du nicht. Schau, was es Neues gibt.",
+      "morning": "Ein frischer Start. Schau, was über Nacht passiert ist.",
+      "noon": "Zeit für eine kurze Pause und die neuesten Beiträge.",
+      "afternoon": "Schön, dass du da bist. Hier ist, was gerade läuft.",
+      "evening": "Lehn dich zurück und hol nach, was du verpasst hast.",
+      "late": "Ein letzter Blick, bevor der Tag endet."
+    },
+    "guest": {
+      "title": "Willkommen",
+      "text": "Melde dich an, um Beiträge zu teilen, Menschen zu folgen und mitzureden.",
+      "cta": "Anmelden",
+      "fallbackTitle": "Schön, dass du da bist"
+    },
+    "week": "KW {{week}}",
+    "dayProgress": "{{percent}} % des Tages vergangen",
+    "holidayIn_one": "{{name}} in {{count}} Tag",
+    "holidayIn_other": "{{name}} in {{count}} Tagen",
+    "holidayToday": "Heute: {{name}}",
+    "holidayTomorrow": "Morgen: {{name}}",
+    "holidays": {
+      "newYear": "Neujahr",
+      "goodFriday": "Karfreitag",
+      "easterMonday": "Ostermontag",
+      "labourDay": "Tag der Arbeit",
+      "ascension": "Christi Himmelfahrt",
+      "whitMonday": "Pfingstmontag",
+      "germanUnity": "Tag der Deutschen Einheit",
+      "christmas": "1. Weihnachtstag",
+      "boxingDay": "2. Weihnachtstag"
+    }
+  },
+  "confirmPage": {
+    "verifyingTitle": "E-Mail wird bestätigt …",
+    "verifyingText": "Einen Moment, wir prüfen deinen Bestätigungslink.",
+    "successTitle": "E-Mail bestätigt",
+    "errorTitle": "Bestätigung fehlgeschlagen",
+    "failed": "Der Bestätigungslink ist ungültig oder wurde bereits verwendet.",
+    "missing": "Im Link fehlt der Bestätigungscode. Öffne den Link bitte direkt aus der E-Mail.",
+    "toLogin": "Jetzt anmelden",
+    "toHome": "Zur Startseite"
+  },
+  "user_relation_not_allowed": "Diese Aktion ist für diese Freundschaftsanfrage nicht erlaubt.",
+  "roles": {
+    "groups": {
+      "system": "System"
+    },
+    "items": {
+      "default": {
+        "label": "Benutzer",
+        "description": "Basisrolle jedes Kontos"
+      },
+      "admin": {
+        "label": "Administrator",
+        "description": "Voller Zugriff inkl. Admin-Bereich"
+      },
+      "dev": {
+        "label": "Entwickler",
+        "description": "Dev-Bereich, Todos und Tickets"
+      },
+      "google": {
+        "label": "Google-Konto",
+        "description": "Automatisch bei Google-Anmeldung"
+      }
+    }
+  },
+  "native": {
+    "googleNotConfigured": "Google-Anmeldung ist in dieser App noch nicht eingerichtet.",
+    "googleCancelled": "Google-Anmeldung abgebrochen.",
+    "createSuccess": "Konto erstellt! Bitte bestätige deine E-Mail-Adresse über den Link, den wir dir geschickt haben.",
+    "resetSuccess": "Wir haben dir eine E-Mail mit einem Link zum Zurücksetzen geschickt.",
+    "loading": "Anmeldestatus wird geprüft …"
+  }
+}
