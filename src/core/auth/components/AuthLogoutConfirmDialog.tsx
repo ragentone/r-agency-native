@@ -21,14 +21,20 @@ export const AuthLogoutConfirmDialog = ({ active, onConfirm, onAbort }: IProps) 
 
   return (
     <Modal visible={active} transparent animationType="fade" onRequestClose={onAbort} statusBarTranslucent>
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel={t('logout.cancel')}
-        onPress={onAbort}
-        className="flex-1 items-center justify-center bg-black/50 px-6"
-      >
-        {/* Klicks auf die Karte nicht als "Abbrechen" werten */}
-        <Pressable onPress={() => undefined} className="w-full max-w-sm gap-4 rounded-2xl bg-background p-6">
+      <View className="flex-1 items-center justify-center px-6">
+        {/* Hintergrund als eigene Ebene neben der Karte – nicht als Eltern-Element der Buttons
+            (im Web wären das sonst verschachtelte <button>). */}
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('logout.cancel')}
+          onPress={onAbort}
+          className="absolute inset-0 bg-black/50"
+        />
+
+        <View
+          accessibilityViewIsModal
+          className="w-full max-w-sm gap-4 rounded-2xl bg-background p-6"
+        >
           <View className="gap-1.5">
             <Text className="text-lg font-bold text-foreground">{t('logout.title')}</Text>
             <Text className="text-sm leading-5 text-muted-foreground">{t('logout.description')}</Text>
@@ -56,8 +62,8 @@ export const AuthLogoutConfirmDialog = ({ active, onConfirm, onAbort }: IProps) 
               <UIText>{t('logout.cancel')}</UIText>
             </Button>
           </View>
-        </Pressable>
-      </Pressable>
+        </View>
+      </View>
     </Modal>
   );
 };

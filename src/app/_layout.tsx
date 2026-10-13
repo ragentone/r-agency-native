@@ -2,8 +2,11 @@ import '../global.css';
 
 import { Stack } from 'expo-router';
 
-import { authTokenStore, AuthProvider, useAuth } from '@/core/auth';
+import { authTokenStore, AuthProvider, completeGoogleAuthPopup, useAuth } from '@/core/auth';
 import { MeshProvider } from '@/core/mesh';
+
+// Web: läuft diese Seite im Google-Login-Popup, Ergebnis an das Hauptfenster geben.
+completeGoogleAuthPopup();
 
 /**
  * Geschützte Navigation: angemeldet → App-Screens, sonst → Login.
